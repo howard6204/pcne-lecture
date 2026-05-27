@@ -1,11 +1,10 @@
-
 <!-- .slide: class="lead" -->
 
 # PCNE-DRP 概論
 ## Drug-Related Problems Classification — PCNE v9.1
 
 <div class="presenter-card">
-  <img src="../模板參考/我的大頭照.jpg" class="avatar-inline">
+  <img src="assets/avatar.jpg" class="avatar-inline">
   <div class="presenter-info">
     <strong>張綜瑋 藥師</strong><br>
     彰化基督教醫療財團法人 員林基督教醫院<br>

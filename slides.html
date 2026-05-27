@@ -44,6 +44,8 @@
       padding: 40px 60px;
       height: 100%;
       box-sizing: border-box;
+      position: relative;
+      overflow: visible;
     }
 
     /* 頂部色帶 */
@@ -51,8 +53,9 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 5px;
+      height: 6px;
       background: linear-gradient(90deg, var(--primary), var(--accent));
+      z-index: 10;
     }
 
     /* 頁尾 */
