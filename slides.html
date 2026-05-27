@@ -37,12 +37,60 @@
       font-size: 32px;
     }
 
+    /* 一般投影片 */
     .reveal .slides section {
       background: var(--bg);
       text-align: left;
-      padding: 40px 60px 60px;
+      padding: 50px 60px 60px;
       box-sizing: border-box;
+      box-shadow: inset 0 6px 0 0 var(--primary);
     }
+
+    /* 封面投影片 */
+    .reveal .slides section.lead {
+      background: linear-gradient(135deg, #C8D5DF 0%, #D5E0D5 60%, #DDD5CC 100%);
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px;
+      box-shadow: none;
+    }
+    .reveal .slides section.lead h1 {
+      color: #3D5A78;
+      font-size: 1.9em;
+      border-bottom: 2px solid rgba(61,90,120,0.3);
+      padding-bottom: 10px;
+    }
+    .reveal .slides section.lead h2 {
+      color: #5A6A58;
+      font-size: 1em;
+      font-weight: 400;
+      margin: 6px 0 24px;
+    }
+
+    /* 章節封面 */
+    .reveal .slides section.section-cover {
+      background: linear-gradient(135deg, #D5DDE5 0%, #E0E8DF 100%);
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: none;
+    }
+
+    /* 結尾 */
+    .reveal .slides section.end {
+      background: linear-gradient(135deg, #3D5A78 0%, #4E7A5A 100%);
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      box-shadow: none;
+    }
+    .reveal .slides section.end h1 { color: #fff; border: none; }
+    .reveal .slides section.end p  { color: rgba(255,255,255,0.85); }
+
+    /* 案例投影片 */
+    .reveal .slides section.case { background: #F8F5F0; }
 
     /* ── 標題 ── */
     .reveal h1 {
@@ -236,6 +284,18 @@
       font-family: monospace;
     }
 
+    /* ── 固定頁尾 ── */
+    #slide-footer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--primary);
+      color: rgba(255,255,255,0.85);
+      font-size: 12px;
+      padding: 4px 20px;
+      z-index: 500;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
     /* ── 功能按鈕列 ── */
     #toolbar {
       position: fixed;
@@ -289,6 +349,9 @@
 
 <body>
 
+<!-- 頁尾 -->
+<div id="slide-footer">PCNE-DRP 概論 &nbsp;|&nbsp; 員林基督教醫院 張綜瑋 藥師</div>
+
 <!-- 功能按鈕列 -->
 <div id="toolbar">
   <button class="tb-btn" title="上一頁 (←)" onclick="Reveal.prev()">◀
@@ -319,8 +382,8 @@
 <div class="reveal">
   <div class="slides">
     <section class="lead">
-<h1>PCNE-DRP 概論
-## Drug-Related Problems Classification — PCNE v9.1</h1>
+<h1>PCNE-DRP 概論</h1>
+<h2>Drug-Related Problems Classification — PCNE v9.1</h2>
 <div class="presenter-card">
   <img src="assets/avatar.jpg" class="avatar-inline">
   <div class="presenter-info">
@@ -792,8 +855,7 @@
 </section>
 
 <section class="end">
-<h1>"If it's not Written Down,
-# it Didn't Happen"</h1>
+<h1>"If it's not Written Down, it Didn't Happen"</h1>
 <p>藥師介入的每一步，都值得被記錄與被看見。</p>
 <p><strong>Thank you for your attention!</strong></p>
 <aside class="notes">用這句話作為結語，呼應課程開始時的主題。<br>藥師每天做了很多事，但只有被記錄下來的才算數——無論是對自己的成長、對團隊的溝通、還是對整個藥事照護專業的發展。<br>希望今天的課程讓各位對 PCNE 有了初步的了解，更重要的是：從今天開始，把你的每一次介入記錄下來。<br>謝謝大家！</aside>
