@@ -452,10 +452,7 @@
 
   // 備忘稿
   function toggleNotes() {
-    const notesWin = window.open('', 'notes');
-    if (!notesWin || notesWin.closed) {
-      Reveal.getPlugin('notes').open();
-    }
+    Reveal.getPlugin('notes').open();
   }
 </script>
 </body>
