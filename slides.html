@@ -286,6 +286,53 @@
       font-family: monospace;
     }
 
+    /* ── 各國比較表 PCNE 列 ── */
+    .pcne-row td { background: #FEF0E8; font-weight: 700; color: #3D5A78; }
+    .sys-table { font-size: 0.62em; }
+    .sys-table th, .sys-table td { text-align: center; padding: 5px 8px; }
+    .sys-table th:first-child, .sys-table td:first-child { text-align: left; }
+    .sys-ref { font-size: 0.58em; color: #777; text-align: right; margin-top: 6px; }
+
+    /* ── 問答互動頁 ── */
+    .quiz-wrap {
+      border: 3px solid #4E8B8B;
+      border-radius: 16px;
+      padding: 44px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .quiz-wrap::after {
+      content: 'Q';
+      font-size: 9em;
+      font-weight: 900;
+      color: rgba(78,139,139,0.12);
+      position: absolute;
+      right: 20px;
+      bottom: -20px;
+      line-height: 1;
+    }
+    .quiz-q {
+      font-size: 1.7em;
+      font-weight: 900;
+      line-height: 1.4;
+      margin-bottom: 40px;
+    }
+    .quiz-opts {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+    }
+    .quiz-opt {
+      background: #D4DCE8;
+      border-radius: 12px;
+      padding: 18px 56px;
+      font-size: 1.5em;
+      font-weight: 700;
+      color: #4A4540;
+    }
+
     /* ── 固定頁尾 ── */
     #slide-footer {
       position: fixed;
@@ -451,6 +498,30 @@
 </section>
 
 <section>
+<h2>各國 DRP 分類系統比較</h2>
+<table class="sys-table"><thead><tr><th>各國系統</th><th>分類數</th><th>清楚定義</th><th>問題分層</th><th>原因分類</th><th>信效度</th><th>介入分類</th><th>研究發表</th></tr></thead><tbody>
+<tr><td>ABC</td><td>3</td><td>N</td><td>N</td><td>I</td><td>N</td><td>N</td><td>N</td></tr>
+<tr><td>ASHP</td><td>13</td><td>Y</td><td>N</td><td>I</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>Cipolle et al</td><td>7</td><td>Y</td><td>N</td><td>N</td><td>N</td><td>Y</td><td>Y</td></tr>
+<tr><td>Granada consensus</td><td>6</td><td>Y</td><td>N</td><td>I</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>Hanlon</td><td>10</td><td>N</td><td>N</td><td>I</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>Hepler/Strand</td><td>8</td><td>Y</td><td>N</td><td>N</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>Krska et al</td><td>13</td><td>Y</td><td>N</td><td>N</td><td>N</td><td>I</td><td>Y</td></tr>
+<tr><td>Mackie</td><td>13</td><td>Y</td><td>N</td><td>N</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>NCC-MERP</td><td>14</td><td>Y</td><td>N</td><td>I</td><td>I</td><td>Y</td><td>Y</td></tr>
+<tr><td>PAS</td><td>5</td><td>N</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>N</td></tr>
+<tr class="pcne-row"><td><strong>PCNE</strong></td><td><strong>6</strong></td><td><strong>Y</strong></td><td><strong>Y</strong></td><td><strong>Y</strong></td><td><strong>Y</strong></td><td><strong>Y</strong></td><td><strong>Y</strong></td></tr>
+<tr><td>PI-Doc</td><td>6</td><td>N</td><td>Y</td><td>I</td><td>I</td><td>Y</td><td>Y</td></tr>
+<tr><td>SHB-SEP</td><td>10</td><td>N</td><td>Y</td><td>Y</td><td>Y</td><td>N</td><td>N</td></tr>
+<tr><td>Westerlund</td><td>13</td><td>Y</td><td>N</td><td>I</td><td>I</td><td>Y</td><td>Y</td></tr>
+<tr><td>PSS 新加坡</td><td>7</td><td>Y</td><td>N</td><td>Y</td><td>Y</td><td>?</td><td>?</td></tr>
+<tr><td>AABBCC 臺灣</td><td>3</td><td>N</td><td>N</td><td>Y</td><td>Y</td><td>?</td><td>?</td></tr>
+</tbody></table>
+<p class="sys-ref">Ref: Ann Pharmacother. 2004 May;38(5):859-67. &nbsp;|&nbsp; PCNE-DRP 課程設計實務，王慧瑜 高級專員</p>
+<aside class="notes">這張表格來自 2004 年發表在 Annals of Pharmacotherapy 的研究，系統性比較了全球各種 DRP 分類工具。<br>PCNE 是唯一在「清楚的定義、問題分層、原因分類、信效度、介入分類、研究發表使用」六個面向全部達到 Y 的系統。<br>這就是為什麼全球藥事照護研究最常採用 PCNE——它的設計最完整，也最適合標準化比較。</aside>
+</section>
+
+<section>
 <h2>藥師介入決策</h2>
 <br>
 <table><thead><tr><th>角度</th><th>評估重點</th></tr></thead><tbody><tr><td><strong>醫療提供者</strong></td><td>是否符合治療適應症？劑量是否正確？有無禁忌症？</td></tr><tr><td><strong>病人</strong></td><td>是否正確使用？有無依從性問題？是否出現副作用？</td></tr></tbody></table>
@@ -595,6 +666,17 @@
 <table><thead><tr><th>指標</th><th>結果</th></tr></thead><tbody><tr><td>識別 DRP 總數</td><td><strong>234 個</strong>（平均 1.95 個／人）</td></tr><tr><td>最常見問題 P</td><td>P1.2 治療效果不佳（38%）> P2.1 副作用（31%）> P3.1 不必要用藥（18%）</td></tr><tr><td>最常見原因 C</td><td>C1.1 不適當用藥（25%）、C3.1 劑量不足（22%）、C7 依從性問題（19%）</td></tr><tr><td>主要介入方式 I</td><td>I2.3 通報處方醫師（52%）、I2.1 病人衛教（30%）</td></tr><tr><td>介入接受率（A1）</td><td><strong>76%</strong></td></tr><tr><td>DRP 解決率（O1＋O2）</td><td><strong>81%</strong></td></tr></tbody></table>
 <blockquote>此類研究可作為藥事照護服務推廣的<strong>實證依據</strong>，並支持健保申報及機構品質改善計畫。</blockquote>
 <aside class="notes">這是一個示範性的研究範例，幫助大家具體理解 PCNE 資料如何呈現。<br>平均每人 1.95 個 DRP——這個數字很有說服力，說明多重用藥病人的藥物問題非常普遍，藥師的角色不可或缺。<br>76% 的介入接受率代表大多數建議被醫師或病人採納，說明藥師的判斷具有臨床參考價值。<br>81% 的 DRP 解決率是很好的成效指標，可以直接用在健保申報或向院方爭取資源的報告中。</aside>
+</section>
+
+<section>
+<div class="quiz-wrap">
+  <div class="quiz-q">PCNE 藥物問題分類系統有<br>100% 正確的答案？</div>
+  <div class="quiz-opts">
+    <div class="quiz-opt">A &nbsp;是</div>
+    <div class="quiz-opt">B &nbsp;否</div>
+  </div>
+</div>
+<aside class="notes">這個問題是開放討論——PCNE 並非像考試一樣有唯一正解。<br>同一個臨床情境，不同藥師可能選出不同的代碼組合，但只要邏輯一致、可辯護，就是有效的記錄。<br>正因如此，PCNE 特別強調「可靠性（reliability）」的訓練，需要多人練習比對、討論，才能建立一致性。<br>在今天的案例練習中，我們的答案提供的是「建議答案」，而非唯一正解，歡迎大家有不同意見時提出討論。</aside>
 </section>
 
 <section class="section-cover">
@@ -839,14 +921,13 @@
 </section>
 
 <section>
-<h2>教材來源與感謝</h2>
-<p>本課程教材之 PCNE 案例與分類架構，參考並改編自以下來源：</p>
-<ul><li><strong>PCNE 公版教材</strong></li></ul>
-<ul><li><strong>社區照護案例</strong></li></ul>
-<ul><li><strong>PCNE 官方分類系統</strong></li></ul>
-<br>
-<blockquote>感謝所有為藥事照護教育付出的前輩與夥伴。</blockquote>
-<aside class="notes">感謝陳妙婷藥師提供 PCNE 的公版教材，以及所有在藥事照護領域持續耕耘的前輩。<br>今天的案例有部分來自員林基督教醫院社區照護的實際案例討論，這些都是臨床藥師日常工作的縮影。<br>如果各位對 PCNE 有任何問題，歡迎透過各種管道繼續交流。</aside>
+<h2>教材感謝</h2>
+<ul>
+  <li><strong>藥師公會全國聯合會－PCNE-DRP 概論公版教材</strong><br>（高雄榮民總醫院 &nbsp;陳妙婷藥師 編製）</li>
+  <li><strong>藥物相關問題分類 V9.1 中文翻譯版</strong><br>（中文版翻譯人員：王慧瑜、黃金舜、葉明功）</li>
+  <li><strong>彰化縣藥師公會課程－PCNE 概論</strong><br>（彰化基督教醫院 &nbsp;王心榆藥師）</li>
+</ul>
+<aside class="notes">在此感謝三位前輩的付出。<br>陳妙婷藥師的公版教材是本課程案例的重要基礎；王慧瑜、黃金舜、葉明功三位翻譯了 PCNE v9.1 的中文版，讓台灣藥師能更容易理解和應用這套系統；王心榆藥師的彰化縣藥師公會課程也提供了寶貴的教學參考。</aside>
 </section>
 
 <section>
