@@ -13,17 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Marp CLI
-        run: npm install -g @marp-team/marp-cli
-
-      - name: Build PDF handout
-        run: |
-          marp pcne-marp.md \
-            --pdf \
-            --output handout.pdf \
-            --allow-local-files \
-            --html || true
-
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:

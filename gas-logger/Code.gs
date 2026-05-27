@@ -1,4 +1,5 @@
 // PCNE 講義領取 — Email 記錄腳本
+// 試算表：https://docs.google.com/spreadsheets/d/1tlXm73C23HkS5sheYldhd8ZlQp56Z1UN9CWGu1dI1T8/edit
 // 部署為 Web App：Execute as Me，Anyone can access
 
 const SHEET_NAME = 'PCNE講義領取';
