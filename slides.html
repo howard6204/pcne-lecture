@@ -467,6 +467,126 @@
     }
     .answer-cover:hover { opacity: 0.85; }
     .answer-cover.revealed { display: none; }
+
+    /* ── 速查表 Modal ── */
+    .ref-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+    }
+    .ref-modal-overlay.open { display: flex; }
+    .ref-modal {
+      background: #fff;
+      border-radius: 6px;
+      padding: 24px 28px 20px;
+      max-width: 680px;
+      width: 92%;
+      max-height: 88vh;
+      overflow-y: auto;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+      position: relative;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #222;
+    }
+    .ref-modal-close {
+      position: absolute;
+      top: 10px; right: 14px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #888;
+      background: none;
+      border: none;
+      font-weight: 700;
+    }
+    .ref-modal-hdr {
+      font-size: 0.85em;
+      color: #555;
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+    .ref-modal-title {
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .ref-modal-subtitle {
+      text-align: center;
+      font-size: 0.85em;
+      color: #666;
+      margin-bottom: 12px;
+    }
+    .ref-modal table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .ref-modal th, .ref-modal td {
+      border: 1px solid #aaa;
+      padding: 7px 10px;
+      vertical-align: middle;
+      text-align: left;
+    }
+    .ref-modal th {
+      background: #e8e8e8;
+      font-weight: 700;
+      text-align: center;
+    }
+    .ref-modal td.code-col {
+      text-align: center;
+      white-space: nowrap;
+      font-weight: 700;
+      color: var(--primary);
+      width: 56px;
+    }
+    .ref-modal td.domain-col {
+      font-weight: 700;
+      vertical-align: top;
+      width: 38%;
+    }
+    .ref-modal td.domain-col small {
+      display: block;
+      font-weight: 400;
+      font-size: 0.82em;
+      color: #555;
+      margin-top: 4px;
+    }
+    .quick-ref-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 12px;
+      padding: 6px 16px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      font-size: 0.68em;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: 0.04em;
+    }
+    .quick-ref-btn:hover { background: var(--primary); }
+
+    /* ── 潛在 / 明顯 問題 標記 ── */
+    .drp-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.7em;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+    .drp-status.potential { background: #FEF0D0; color: #7A5000; border: 1px solid #E0B040; }
+    .drp-status.manifest  { background: #FDE8E8; color: #8B0000; border: 1px solid #C48282; }
   </style>
 </head>
 
@@ -500,6 +620,14 @@
   <button class="tb-btn" id="btn-fs" title="全螢幕 (F)" onclick="toggleFS()">⛶
     <span class="label">全螢幕</span>
   </button>
+</div>
+
+<!-- 速查表 Modal Overlay -->
+<div id="ref-modal-overlay" class="ref-modal-overlay" onclick="closeRefModal()">
+  <div class="ref-modal" onclick="event.stopPropagation()">
+    <button class="ref-modal-close" onclick="closeRefModal()">✕</button>
+    <div id="ref-modal-content"></div>
+  </div>
 </div>
 
 <div class="reveal">
@@ -705,6 +833,32 @@
 <aside class="notes">PCNE 的每個領域都有主分類和次分類，這一頁說明什麼情況用哪一種。<br>如果你只是要統計「這個月發現了幾個療效問題、幾個安全問題」，主分類就夠了，操作也最快。<br>如果要做比較深入的研究、訓練評估，或是需要了解「到底是哪種原因最常發生」，就需要次分類。<br>建議初學者從主分類開始練習，等熟悉邏輯之後再加入次分類。</aside>
 </section>
 
+<section>
+<h2>每個 DRP 記錄前，先判斷：<em>潛在</em> 還是 <em>明顯</em>？</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:18px;">
+  <div style="background:var(--warn);border:2px solid var(--warn-border);border-radius:10px;padding:18px 20px;">
+    <div style="font-size:0.6em;color:#999;letter-spacing:0.05em;margin-bottom:6px;">□ 勾選</div>
+    <h3 style="color:var(--primary);margin:0 0 8px;font-size:1em;">潛在的問題</h3>
+    <p style="margin:0 0 10px;font-size:0.85em;"><strong>尚未發生</strong>，但一旦發生，<br>可能影響治療結果</p>
+    <ul style="font-size:0.8em;display:flex;flex-direction:column;gap:6px;">
+      <li>預防性介入的時機</li>
+      <li>例：腎功能不全患者仍使用一般劑量</li>
+    </ul>
+  </div>
+  <div style="background:#FDEAEA;border:2px solid #C48282;border-radius:10px;padding:18px 20px;">
+    <div style="font-size:0.6em;color:#999;letter-spacing:0.05em;margin-bottom:6px;">□ 勾選</div>
+    <h3 style="color:#8B2222;margin:0 0 8px;font-size:1em;">明顯的問題</h3>
+    <p style="margin:0 0 10px;font-size:0.85em;"><strong>已發生</strong>，且會影響治療結果</p>
+    <ul style="font-size:0.8em;display:flex;flex-direction:column;gap:6px;">
+      <li>需立即評估與介入</li>
+      <li>例：病人已出現副作用、血糖持續惡化</li>
+    </ul>
+  </div>
+</div>
+<blockquote style="margin-top:16px;">每筆 DRP 記錄必須勾選其中一項，<strong>兩者擇一，不可空白</strong></blockquote>
+<aside class="notes">在填寫 PCNE 表格時，第一步就是決定這個問題是「潛在」還是「明顯」。<br>潛在問題——問題尚未發生，但你預期可能發生，例如藥物交互作用風險、腎功能不全但劑量未調整。<br>明顯問題——問題已經發生，例如病人已有副作用症狀、血糖長期控制不良。<br>這個區別很重要，因為它影響介入的緊迫性，以及後續 Outcome 怎麼追蹤。</aside>
+</section>
+
 <section class="section-cover">
 <h1>問題領域 [P]</h1>
 <aside class="notes">第一個領域——問題 P。<br>記住：P 是「現在發生了什麼事」，不是「為什麼」，也不是「怎麼處理」。</aside>
@@ -717,6 +871,7 @@
 <tr><td><strong>P2</strong></td><td>安全性問題<br><small>（若無具體原因可跳過 C 分類）</small></td><td>P2.1 可能發生藥物不良事件</td></tr>
 <tr><td><strong>P3</strong></td><td>其他</td><td>P3.1 不必要的藥物治療<br>P3.2 不確定的問題或抱怨，需進一步說明<small>（無法明確分類時才用）</small></td></tr>
 </tbody></table>
+<button class="quick-ref-btn" onclick="showRefModal('P');event.stopPropagation()">📋 開啟 P 分類速查表</button>
 <aside class="notes">P 領域只有 3 個主分類，是五個領域中最簡單的。注意 v9.1 的 P2 只有 P2.1，沒有 P2.2。<br>P1 療效問題——P1.1 是完全沒效，P1.2 是有效但不夠好，P1.3 是有適應症但沒有治療到的狀況。<br>P2 安全性問題——只有 P2.1，記錄可能或已發生的藥物不良事件；如果找不到具體原因（C），可以跳過原因分類。<br>P3 其他——P3.1 是藥物已不需要繼續使用；P3.2 很特別，是「問題不明確」，這在臨床很常見，先記下來，等釐清後再更新。<br>在案例練習中，你會發現 P2.1 最常出現——幾乎任何副作用都可以先標 P2.1。</aside>
 </section>
 
@@ -828,6 +983,17 @@
 <aside class="notes">A 和 O 是兩個不同層次的記錄。<br>A 是「接受度」——每一個介入行為都有自己的接受度。向醫師建議被接受？A1。向病人衛教，但病人拒絕改變行為？A2。<br>O 是「整個 DRP 的最終結果」——只有一個。就算有三個介入，最後整個問題只記錄一個 O。<br>A2 未被接受 ≠ O3 問題未解決——即使醫師拒絕你的建議，如果後來病人自然好轉，O 仍然可以是 O1。<br>這兩個指標在研究中非常重要：A1 的比率代表藥師影響力，O1+O2 的比率代表照護品質。</aside>
 </section>
 
+<section>
+<div class="quiz-wrap">
+  <div class="quiz-q">PCNE 藥物問題分類系統有<br>100% 正確的答案？</div>
+  <div class="quiz-opts">
+    <div class="quiz-opt">A &nbsp;是</div>
+    <div class="quiz-opt">B &nbsp;否</div>
+  </div>
+</div>
+<aside class="notes">這個問題是開放討論——PCNE 並非像考試一樣有唯一正解。<br>同一個臨床情境，不同藥師可能選出不同的代碼組合，但只要邏輯一致、可辯護，就是有效的記錄。<br>正因如此，PCNE 特別強調「可靠性（reliability）」的訓練，需要多人練習比對、討論，才能建立一致性。<br>在今天的案例練習中，我們的答案提供的是「建議答案」，而非唯一正解，歡迎大家有不同意見時提出討論。</aside>
+</section>
+
 <section class="section-cover">
 <h1>PCNE 在研究中的應用</h1>
 <aside class="notes">了解了 PCNE 的五個領域之後，我們來看這套工具如何支援研究與品質改善。</aside>
@@ -846,17 +1012,6 @@
 <table><thead><tr><th>指標</th><th>結果</th></tr></thead><tbody><tr><td>識別 DRP 總數</td><td><strong>234 個</strong>（平均 1.95 個／人）</td></tr><tr><td>最常見問題 P</td><td>P1.2 治療效果不佳（38%）> P2.1 副作用（31%）> P3.1 不必要用藥（18%）</td></tr><tr><td>最常見原因 C</td><td>C1.1 不適當用藥（25%）、C3.1 劑量不足（22%）、C7 依從性問題（19%）</td></tr><tr><td>主要介入方式 I</td><td>I2.3 通報處方醫師（52%）、I2.1 病人衛教（30%）</td></tr><tr><td>介入接受率（A1）</td><td><strong>76%</strong></td></tr><tr><td>DRP 解決率（O1＋O2）</td><td><strong>81%</strong></td></tr></tbody></table>
 <blockquote>此類研究可作為藥事照護服務推廣的<strong>實證依據</strong>，並支持健保申報及機構品質改善計畫。</blockquote>
 <aside class="notes">這是一個示範性的研究範例，幫助大家具體理解 PCNE 資料如何呈現。<br>平均每人 1.95 個 DRP——這個數字很有說服力，說明多重用藥病人的藥物問題非常普遍，藥師的角色不可或缺。<br>76% 的介入接受率代表大多數建議被醫師或病人採納，說明藥師的判斷具有臨床參考價值。<br>81% 的 DRP 解決率是很好的成效指標，可以直接用在健保申報或向院方爭取資源的報告中。</aside>
-</section>
-
-<section>
-<div class="quiz-wrap">
-  <div class="quiz-q">PCNE 藥物問題分類系統有<br>100% 正確的答案？</div>
-  <div class="quiz-opts">
-    <div class="quiz-opt">A &nbsp;是</div>
-    <div class="quiz-opt">B &nbsp;否</div>
-  </div>
-</div>
-<aside class="notes">這個問題是開放討論——PCNE 並非像考試一樣有唯一正解。<br>同一個臨床情境，不同藥師可能選出不同的代碼組合，但只要邏輯一致、可辯護，就是有效的記錄。<br>正因如此，PCNE 特別強調「可靠性（reliability）」的訓練，需要多人練習比對、討論，才能建立一致性。<br>在今天的案例練習中，我們的答案提供的是「建議答案」，而非唯一正解，歡迎大家有不同意見時提出討論。</aside>
 </section>
 
 <section class="section-cover">
@@ -880,6 +1035,7 @@
 <h2>案例一：答案</h2>
 <p>患者因骨折及疼痛治療，你發現他同時使用 Acetaminophen 2g/day 以外，還在使用 <strong>Tramacet</strong>（Acetaminophen 325mg / tramadol 37.5mg）<strong>一日四次</strong>。</p>
 <div class="code-box">
+<div class="drp-status potential">□ 潛在的問題：尚未出現症狀，但存在肝毒性風險</div>
 <p><strong>P2.1</strong> 可能發生藥物不良事件（Acetaminophen 總量超標）<br><br><strong>C1.4</strong> 使用相同或類似功效的藥物組合（重複用藥）<br><br><strong>I2.3</strong> 將病人轉介給醫師/醫院</p>
 </div>
 <aside class="notes">P2.1——「可能發生」不良事件，注意是「可能」，問題是潛在性的，不需要等到真的發生肝毒性才記錄。<br>C1.4——重複用藥是最直接的原因分類。<br>I2.3——藥師告知了病人，但最終停藥的決定需要醫師介入，所以是轉介給醫師/醫院。<br>接受度 A 呢？案例說病人「尚未決定」，如果後來沒有進一步消息，可記 A3（不明）。<br>Outcome O 呢？同樣視後續追蹤結果而定。</aside>
@@ -901,6 +1057,7 @@
 <h2>案例二：答案</h2>
 <p>87 歲女性，三年來每天服用 <strong>digoxin 0.25mg</strong> 治療心房顫動，主訴<strong>視力異常</strong>。</p>
 <div class="code-box">
+<div class="drp-status manifest">■ 明顯的問題：視覺異常症狀已發生</div>
 <p><strong>P2.1</strong> 可能發生藥物不良事件（視覺障礙為 digoxin 毒性表現）<br><br><strong>C3.2</strong> 劑量過高（年齡增長導致腎清除率下降，藥物蓄積）<br><br><strong>I2.3</strong> 將病人轉介給醫師/醫院</p>
 </div>
 <aside class="notes">P2.1 或 P2.2？這裡選 P2.1——視覺異常屬於不良事件，毒性（P2.2）通常指更嚴重的器官損傷。<br>C3.2——劑量過高，原因是年齡相關腎功能下降，這是「相對的」劑量過高，不是一開始就開錯。<br>I2.3——轉介給醫師是關鍵步驟，Digoxin 毒性需要馬上抽血確認血中濃度。<br>這個案例示範了：藥師在取藥窗口的一句詢問，可能及時發現嚴重的毒性反應。</aside>
@@ -922,6 +1079,7 @@
 <h2>案例三：答案</h2>
 <p>45 歲<strong>氣喘</strong>男性，被新加開了 <strong>propranolol</strong>（對氣喘為禁忌），與醫師協商後換用 ACE inhibitor。</p>
 <div class="code-box">
+<div class="drp-status potential">□ 潛在的問題：支氣管痙攣尚未發生，及時介入預防</div>
 <p><strong>P2.1</strong> 可能發生藥物不良事件（支氣管痙攣風險）<br><br><strong>C1.1</strong> 藥物選擇不適當（有禁忌症）<br><br><strong>I1.4</strong> 與醫師協商達成介入共識</p>
 </div>
 <aside class="notes">I1.4 是介入中強度最高的——代表藥師不只建議，而是和醫師一起討論、共同決定。<br>這個結果是正面的：接受度 A1（被接受），結果 O1（問題已解決）。<br>這個案例是展示藥師高價值介入的好例子——防止了潛在的嚴重不良事件，並透過協商達成改變。</aside>
@@ -943,6 +1101,7 @@
 <h2>案例四：答案</h2>
 <p>男性氣喘患者 ICS 控制不佳，頻繁使用緩解劑；病人諮詢後同意回診。</p>
 <div class="code-box">
+<div class="drp-status manifest">■ 明顯的問題：氣喘持續控制不良，已影響治療結果</div>
 <p><strong>P1.2</strong> 藥物治療效果未達最佳（氣喘控制不良）<br><br><strong>C7.1</strong> 病人使用超出醫囑量的藥物（過度依賴緩解劑）<br><br><strong>I2.1</strong> 病人藥物諮詢</p>
 </div>
 <aside class="notes">這個案例接受度：病人拒絕增加 ICS 劑量（A2），但接受了回診（A1）——可以記兩個介入及各自的接受度。<br>Outcome 在此時無法確定，需要追蹤後才能填寫。<br>這個案例很好地展示了：DRP 不總是「處方問題」，依從性和使用行為也是常見的原因。</aside>
@@ -963,6 +1122,7 @@
 <h2>案例五：答案</h2>
 <p>M 先生細菌感染，amoxicillin 療程僅開 2 天，應為 7 天。</p>
 <div class="code-box">
+<div class="drp-status potential">□ 潛在的問題：療程過短，治療失敗風險尚未發生</div>
 <p><strong>P1.2</strong> 藥物治療效果未達最佳（療程不足）<br><br><strong>C4.1</strong> 療程過短<br><br><strong>I1.4</strong> 與醫師協商達成介入共識</p>
 </div>
 <aside class="notes">這個案例結果很好：醫師接受建議（A1），療程延長，問題預期可以解決（O1）。<br>這也是一個很容易跟醫師溝通的案例——有明確的指引依據，醫師通常樂意調整。<br>C4 的療程問題在社區非常常見，建議大家熟悉常見感染症的標準療程，這是快速辨識這類 DRP 的基礎。</aside>
@@ -984,6 +1144,7 @@
 <h2>案例六：答案</h2>
 <p>40 歲女性，amitriptyline + nitrofurantoin 使用超過一年，主訴排尿疼痛，原因未明。</p>
 <div class="code-box">
+<div class="drp-status manifest">■ 明顯的問題：排尿疼痛症狀已持續存在</div>
 <p><strong>P3.2</strong> 問題不明確，需進一步釐清（同時可考慮 P1.3）<br><br><strong>C9.3</strong> 無法確定的原因<br><br><strong>I2.3</strong> 將病人轉介給醫師（建議重新評估處方）</p>
 </div>
 <aside class="notes">這個案例告訴我們：PCNE 有能力記錄「不確定」的情況，不是每個 DRP 都要有完美的答案。<br>P3.2 是一個很實用的代碼，尤其在社區場域，病人的症狀往往需要進一步釐清。<br>轉介（I2.3）是合適的介入——超出了藥師可以單獨處理的範圍，需要醫師重新評估。<br>這也是一個提醒：長期使用兩種藥物，不代表這組合一定沒問題，需要定期重新評估。</aside>
@@ -1005,6 +1166,7 @@
 <h2>案例七：答案</h2>
 <p>34 歲孕婦，懷孕四個月，嚴重頭痛，懷疑子癇前期，目前無相對應治療。</p>
 <div class="code-box">
+<div class="drp-status manifest">■ 明顯的問題：嚴重頭痛症狀已發生，缺乏必要治療</div>
 <p><strong>P1.3</strong> 藥物治療產生錯誤效果 / 存在未被處理的症狀<br><br><strong>C1.5</strong> 存在新的適應症，但尚未有適當的藥物治療<br><br><strong>I2.3</strong> 將病人轉介給醫師/醫院</p>
 </div>
 <aside class="notes">C1.5 是一個重要的代碼——有需要治療的疾病，但還沒有開始治療。這不是「現有藥物的問題」，而是「缺藥」的問題。<br>在台灣的社區藥局，這類情況（識別未診斷或未治療的疾病狀態）是藥師高價值服務的表現之一。<br>介入 I2.3 轉介是唯一合適的選項，且需要「緊急轉介」——這個細節在案例敘述中隱含，實際記錄時可在備注欄說明緊急程度。</aside>
@@ -1026,6 +1188,7 @@
 <h2>案例八：答案</h2>
 <p>J 先生 H. pylori 已根除，ranitidine 已無適應症但持續使用中；醫師未接受停藥建議。</p>
 <div class="code-box">
+<div class="drp-status manifest">■ 明顯的問題：適應症消失後仍持續使用不必要的藥物</div>
 <p><strong>P3.1</strong> 不必要的藥物治療（適應症已消失）<br><br><strong>C4.2</strong> 療程過長<br><br><strong>I1.3</strong> 向醫師提出建議（<strong>接受度：A2 未被接受</strong>）</p>
 </div>
 <aside class="notes">A2 未被接受——Outcome 怎麼記？<br>如果 ranitidine 繼續使用且沒有後續問題，可以記 O3（問題未解決）——因為「不必要的藥物治療」這個 DRP 依然存在。<br>但這不代表藥師失敗——藥師已盡到提醒責任，後續決定在醫師和病人手中。<br>這個案例也提示：定期 medication review 是發現「已失去適應症」藥物的最佳方式。</aside>
@@ -1047,6 +1210,7 @@
 <h2>案例九：答案</h2>
 <p>84 歲女性，ICS 使用後未漱口導致鵝口瘡；衛教後一週改善（<strong>O1 問題已解決</strong>）。</p>
 <div class="code-box">
+<div class="drp-status manifest">■ 明顯的問題：口腔念珠菌感染已發生</div>
 <p><strong>P2.1</strong> 可能發生藥物不良事件（口腔念珠菌感染）<br><br><strong>C7.6</strong> 藥物使用方式錯誤（使用後未漱口）<br><br><strong>I2.1</strong> 病人藥物諮詢（正確吸入劑使用技巧衛教）</p>
 </div>
 <aside class="notes">這個案例的完整記錄：<br>- P2.1 / C7.6 / I2.1 / A1（病人接受衛教）/ O1（問題解決）<br>這是一個很漂亮的 PCNE 完整記錄示範——五個領域全部有資料，且最終 Outcome 是正向的。<br>在研究上，這種「藥師介入 → 病人接受 → 問題解決」的閉環記錄，是展示藥事照護價值最有力的證據。</aside>
@@ -1068,6 +1232,7 @@
 <h2>案例十：答案</h2>
 <p>Ciprofloxacin 與制酸劑同服，多價金屬離子螯合導致抗生素吸收不足。<br>需分開服用：ciprofloxacin 應在服 Iwell <strong>前 1 小時</strong>或<strong>後至少 2 小時</strong>才服用。</p>
 <div class="code-box">
+<div class="drp-status manifest">■ 明顯的問題：同服交互作用正在發生，療效已受影響</div>
 <p><strong>P1.2</strong> 藥物治療效果未達最佳（藥物吸收受影響）<br><br><strong>C1.4</strong> / <strong>C6.1</strong> 藥物選擇或給藥時間問題（交互作用）<br><br><strong>I2.1</strong> 病人藥物諮詢（告知分開服用的時間間隔）</p>
 </div>
 <aside class="notes">C 的分類這裡可以有些彈性：如果你認為是「這兩藥不應該同時服用」的藥物選擇問題，用 C1.4；如果認為是「給藥時間不當」造成，用 C6.1。兩者都是合理的，可以根據介入策略來選擇。<br>重點訊息給病人：「吃抗生素那天，制酸劑要分開服，不能同時吃」——這個衛教訊息簡單、具體、病人容易執行。<br>這個案例在社區藥局非常常見，尤其是老年多重用藥病人。</aside>
@@ -1089,6 +1254,7 @@
 <h2>案例十一：答案</h2>
 <p>Doxazosin 引起體位性低血壓，夜間起身跌倒；建議換用 tamsulosin。</p>
 <div class="code-box">
+<div class="drp-status manifest">■ 明顯的問題：跌倒事件已多次發生</div>
 <p><strong>P2.1</strong> 可能發生藥物不良事件（體位性低血壓、跌倒風險）<br><br><strong>C3.2</strong> 劑量效應問題 / <strong>C1.1</strong> 藥物選擇問題（可考慮選擇性更高的藥物）<br><br><strong>I2.1</strong> 告知病人體位性低血壓預防措施（緩慢起身）<br><br><strong>I1.3</strong> 建議醫師評估換用 tamsulosin</p>
 </div>
 <aside class="notes">這個案例示範了「一個問題、兩個介入」的記錄方式。<br>I2.1 對病人衛教（緩慢起身、床邊放夜燈），I1.3 向醫師建議換藥——這兩個介入各有各的接受度。<br>Tamsulosin 是高選擇性 α1A blocker，對泌尿道的選擇性高於血管，體位性低血壓的副作用較少。<br>跌倒是老年人最嚴重的不良事件之一，這個案例說明藥師的介入可以直接影響病人安全。</aside>
@@ -1316,6 +1482,61 @@
   });
 
   document.addEventListener('click', () => { popover.style.display = 'none'; });
+
+  // ── 速查表 Modal ──────────────────────────────────
+  const REF_MODAL_DATA = {
+    P: {
+      header: '□ 潛在的問題（尚未發生，一旦發生，可能影響治療結果）　　□ 明顯的問題（已發生，且會影響治療結果）',
+      title: '問題類別（Problems）',
+      subtitle: '只能有一個問題，若有兩個則需分開',
+      cols: ['主要面向', '編碼', '問題'],
+      rows: [
+        { domain: '<strong>1. 治療效果</strong><br><small>存在（或潛在）藥品治療效果（或缺乏效果）問題</small>', codes: [
+          ['P1.1', '藥物治療無效'],
+          ['P1.2', '治療效果不佳'],
+          ['P1.3', '有未治療的症狀或適應症'],
+        ]},
+        { domain: '<strong>2. 治療安全性</strong><br><small>病人遭受或可能遭受藥品不良事件<br>註：如果沒有具體的原因，可以跳過原因類別分類（不一定有原因）</small>', codes: [
+          ['P2.1', '可能發生藥物不良事件'],
+        ]},
+        { domain: '<strong>3. 其他</strong>', codes: [
+          ['P3.1', '不必要的藥物治療'],
+          ['P3.2', '不確定的問題或抱怨，需要進一步說明（請僅於無法明確分類時使用）'],
+        ]},
+      ]
+    }
+  };
+
+  function showRefModal(type) {
+    const data = REF_MODAL_DATA[type];
+    if (!data) return;
+    let html = '';
+    if (data.header) html += `<div class="ref-modal-hdr">${data.header}</div>`;
+    html += `<div class="ref-modal-title">${data.title}`;
+    if (data.subtitle) html += `&nbsp;<span style="font-size:0.65em;font-weight:400;color:#666;">${data.subtitle}</span>`;
+    html += `</div>`;
+    html += `<table><thead><tr>${data.cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+    data.rows.forEach(row => {
+      const rs = row.codes.length;
+      row.codes.forEach((code, i) => {
+        html += '<tr>';
+        if (i === 0) html += `<td class="domain-col" rowspan="${rs}">${row.domain}</td>`;
+        html += `<td class="code-col">${code[0]}</td><td>${code[1]}</td></tr>`;
+      });
+    });
+    html += '</tbody></table>';
+    document.getElementById('ref-modal-content').innerHTML = html;
+    document.getElementById('ref-modal-overlay').classList.add('open');
+    event.stopPropagation();
+  }
+
+  function closeRefModal() {
+    document.getElementById('ref-modal-overlay').classList.remove('open');
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeRefModal();
+  });
 </script>
 </body>
 </html>
