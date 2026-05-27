@@ -13,8 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Chalkboard plugin CSS (暫時停用除錯) -->
-  <!-- <link rel="stylesheet" href="...chalkboard/style.css"> -->
+  <link rel="stylesheet" href="assets/chalkboard/style.css">
 
   <style>
     /* ── 色彩系統 ── */
@@ -1117,8 +1116,7 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
 
-<!-- Chalkboard plugin (暫時停用除錯) -->
-<!-- <script src="...chalkboard/plugin.js"></script> -->
+<script src="assets/chalkboard/plugin.js"></script>
 
 <script>
   Reveal.initialize({
@@ -1132,7 +1130,14 @@
     minScale: 0.2,
     maxScale: 2.0,
 
-    plugins: [RevealHighlight, RevealNotes],
+    plugins: [RevealHighlight, RevealNotes, RevealChalkboard],
+    chalkboard: {
+      boardmarkerWidth: 4,
+      chalkWidth: 5,
+      chalkEffect: 0.5,
+      toggleNotesButton: false,
+      toggleChalkboardButton: false,
+    },
   });
 
   // 全螢幕
@@ -1149,9 +1154,9 @@
     btn.querySelector('.label').textContent = document.fullscreenElement ? '離開' : '全螢幕';
   });
 
-  // 畫筆 / 黑板（chalkboard 停用中）
-  function togglePen() {}
-  function toggleBoard() {}
+  // 畫筆 / 黑板
+  function togglePen()   { RevealChalkboard.toggleNotesCanvas(); }
+  function toggleBoard() { RevealChalkboard.toggleChalkboard(); }
 
   // 備忘稿
   function toggleNotes() {
