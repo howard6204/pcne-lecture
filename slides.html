@@ -13,9 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Chalkboard plugin CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+  <!-- Chalkboard plugin CSS (暫時停用除錯) -->
+  <!-- <link rel="stylesheet" href="...chalkboard/style.css"> -->
 
   <style>
     /* ── 色彩系統 ── */
@@ -838,9 +837,8 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
 
-<!-- Chalkboard plugin -->
-<script src="https://cdn.jsdelivr.net/gh/rajgoel/reveal.js-plugins@4.2.2/chalkboard/plugin.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/rajgoel/reveal.js-plugins@4.2.2/customcontrols/plugin.js"></script>
+<!-- Chalkboard plugin (暫時停用除錯) -->
+<!-- <script src="...chalkboard/plugin.js"></script> -->
 
 <script>
   Reveal.initialize({
@@ -852,49 +850,7 @@
     height: 720,
     margin: 0,
 
-    chalkboard: {
-      boardmarkerWidth: 3,
-      chalkWidth: 4,
-      chalkEffect: 0.5,
-      storage: 'pcne-chalkboard',
-      src: null,
-      readOnly: false,
-      toggleChalkboardButton: { left: '80px', bottom: '30px', top: 'auto', right: 'auto' },
-      toggleNotesButton: { left: '130px', bottom: '30px', top: 'auto', right: 'auto' },
-    },
-
-    customcontrols: {
-      controls: [
-        {
-          icon: '<i class="fa fa-pen-square"></i>',
-          title: '畫筆 (C)',
-          action: 'RevealChalkboard.toggleNotesCanvas();'
-        },
-        {
-          icon: '<i class="fa fa-chalkboard"></i>',
-          title: '黑板 (B)',
-          action: 'RevealChalkboard.toggleChalkboard();'
-        },
-        {
-          icon: '<i class="fa fa-trash"></i>',
-          title: '清除 (Del)',
-          action: 'RevealChalkboard.clear();'
-        }
-      ]
-    },
-
-    keyboard: {
-      67: () => RevealChalkboard.toggleNotesCanvas(),  // C
-      66: () => RevealChalkboard.toggleChalkboard(),   // B
-      46: () => RevealChalkboard.clear(),              // Del
-    },
-
-    plugins: [
-      RevealHighlight,
-      RevealNotes,
-      ...(typeof RevealChalkboard !== 'undefined' ? [RevealChalkboard] : []),
-      ...(typeof RevealCustomControls !== 'undefined' ? [RevealCustomControls] : []),
-    ],
+    plugins: [RevealHighlight, RevealNotes],
   });
 
   // 全螢幕
@@ -911,21 +867,9 @@
     btn.querySelector('.label').textContent = document.fullscreenElement ? '離開' : '全螢幕';
   });
 
-  // 畫筆
-  let penActive = false;
-  function togglePen() {
-    RevealChalkboard.toggleNotesCanvas();
-    penActive = !penActive;
-    document.getElementById('btn-pen').classList.toggle('active', penActive);
-  }
-
-  // 黑板
-  let boardActive = false;
-  function toggleBoard() {
-    RevealChalkboard.toggleChalkboard();
-    boardActive = !boardActive;
-    document.getElementById('btn-board').classList.toggle('active', boardActive);
-  }
+  // 畫筆 / 黑板（chalkboard 停用中）
+  function togglePen() {}
+  function toggleBoard() {}
 
   // 備忘稿
   function toggleNotes() {
