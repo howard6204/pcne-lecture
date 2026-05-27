@@ -287,8 +287,8 @@
 
     /* ── 各國比較表 PCNE 列 ── */
     .pcne-row td { background: #FEF0E8; font-weight: 700; color: #3D5A78; }
-    .sys-table { font-size: 0.44em; width: 100%; border-collapse: collapse; line-height: 1.15; }
-    .sys-table th, .sys-table td { text-align: center; padding: 1px 4px; border-bottom: 1px solid #DDD; }
+    .sys-table { font-size: 0.40em; width: 100%; border-collapse: collapse; line-height: 1.05; }
+    .sys-table th, .sys-table td { text-align: center; padding: 0 3px; border-bottom: 1px solid #DDD; }
     .sys-table th:first-child, .sys-table td:first-child { text-align: left; }
     .sys-table thead th { background: #E8EEF4; font-weight: 700; }
     .sys-ref { font-size: 0.44em; color: #777; text-align: right; margin-top: 2px; }
@@ -572,6 +572,29 @@
       letter-spacing: 0.04em;
     }
     .quick-ref-btn:hover { background: var(--primary); }
+
+    /* ── 案例題目空白格 ── */
+    .answer-blank { display: flex; gap: 14px; margin: 10px 0; }
+
+    /* ── 潛在/明顯 Picker ── */
+    .drp-picker { display: flex; align-items: center; gap: 8px; margin: 8px 0 6px; }
+    .drp-picker-label { font-size: 0.65em; color: #777; white-space: nowrap; }
+    .drp-pick-btn {
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.65em;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      border: 1.5px solid #ccc;
+      background: #f5f5f5;
+      color: #888;
+      transition: all 0.15s;
+      letter-spacing: 0.03em;
+    }
+    .drp-pick-btn:hover { border-color: #999; color: #555; }
+    .drp-pick-btn.selected-potential { background: #FEF0D0; color: #7A5000; border-color: #E0B040; }
+    .drp-pick-btn.selected-manifest  { background: #FDE8E8; color: #8B0000; border-color: #C48282; }
 
     /* ── 潛在 / 明顯 問題 標記 ── */
     .drp-status {
@@ -959,6 +982,7 @@
 </td></tr>
 </tbody></table>
 <blockquote>一個問題可對應<strong>多個原因</strong>，但建議聚焦 ≦ 3 個</blockquote>
+<button class="quick-ref-btn" onclick="showRefModal('C');event.stopPropagation()">📋 開啟 C 分類速查表</button>
 <aside class="notes">C6 到 C9 偏向「使用端」的問題。<br>C7 病人因素是社區藥師最常遇到的——C7.1「不吃」是故意不服藥；C7.8 是無意間用錯；C7.9「磨粉」是因為吞嚥困難等生理因素；C7.10「溝通」是病人聽不懂說明。<br>C8 照護轉銜——在病人從醫院轉到社區，或跨科就醫時，常因用藥整合問題產生 DRP。<br>C9.3「正常使用但就有 ADR」——臨床上有些 ADR 無法預期，用 C9.3 是誠實的記錄，而非記錄失敗。<br>原因可以複選，但建議聚焦三個以內，避免過度歸因。</aside>
 </section>
 
@@ -993,6 +1017,7 @@
   I4.2 通報副作用給相關部門 <span class="code-tag">通報 ADR</span>
 </td></tr>
 </tbody></table>
+<button class="quick-ref-btn" onclick="showRefModal('I');event.stopPropagation()">📋 開啟 I 分類速查表</button>
 <aside class="notes">I1.1 到 I1.4 有介入強度的差異：I1.1 只是告知（如提醒慢箋到期），I1.4 是和醫師共同討論決定方案。<br>I1.2「要求醫師提供資訊」——例如詢問某藥要不要繼續開、或詢問開藥天數，這是「釐清問題」的行為，不是建議。<br>I2.4「口述給照顧者」——和 I2.1「衛教病人」不同，注意照顧者和病人是不同對象。<br>I3.4「使用方法調整」——不只是換藥或改劑量，而是調整藥袋上的其他指示，如飯前改飯後、加上提醒間隔等。<br>I0.1 很重要：識別了 DRP 但決定不介入，也要記錄 I0，並說明理由。</aside>
 </section>
 
@@ -1117,7 +1142,7 @@
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;font-size:0.72em;">
 
   <div style="background:#EEF3F8;border-radius:8px;padding:12px 14px;">
-    <div style="font-size:0.82em;color:#555;margin-bottom:4px;">Wang HY et al. &nbsp;<em>Pharmacoepidemiol Drug Saf.</em> 2016 &nbsp;|&nbsp; PMID 27730699</div>
+    <div style="font-size:0.82em;color:#555;margin-bottom:4px;">Wang HY et al. &nbsp;<em>Pharmacoepidemiol Drug Saf.</em> 2016 &nbsp;|&nbsp; <a href="https://pubmed.ncbi.nlm.nih.gov/27730699/" target="_blank" style="color:var(--primary);text-decoration:underline;">PMID 27730699</a></div>
     <div style="font-weight:700;color:var(--primary);margin-bottom:6px;">門診多重用藥病人 DRP 分析（台南奇美）</div>
     <table style="width:100%;border-collapse:collapse;font-size:0.9em;">
       <tr><td style="padding:2px 0;color:#555;">研究設計</td><td style="padding:2px 6px;">橫斷面研究，PCNE-DRP 系統</td></tr>
@@ -1129,7 +1154,7 @@
   </div>
 
   <div style="background:#F0F5EE;border-radius:8px;padding:12px 14px;">
-    <div style="font-size:0.82em;color:#555;margin-bottom:4px;">Chan DC et al. &nbsp;<em>Arch Gerontol Geriatr.</em> 2011 &nbsp;|&nbsp; PMID 21353318</div>
+    <div style="font-size:0.82em;color:#555;margin-bottom:4px;">Chan DC et al. &nbsp;<em>Arch Gerontol Geriatr.</em> 2011 &nbsp;|&nbsp; <a href="https://pubmed.ncbi.nlm.nih.gov/21353318/" target="_blank" style="color:var(--accent);text-decoration:underline;">PMID 21353318</a></div>
     <div style="font-weight:700;color:var(--accent);margin-bottom:6px;">老年多重用藥安全審查（台大醫院）</div>
     <table style="width:100%;border-collapse:collapse;font-size:0.9em;">
       <tr><td style="padding:2px 0;color:#555;">研究對象</td><td style="padding:2px 6px;">≥65 歲多重用藥老人，193 人</td></tr>
@@ -1635,6 +1660,103 @@
           ['P3.2', '不確定的問題或抱怨，需要進一步說明（請僅於無法明確分類時使用）'],
         ]},
       ]
+    },
+    C: {
+      title: '原因類別（Causes）',
+      subtitle: '一個問題可對應多個原因，建議聚焦 ≦ 3 個',
+      cols: ['主要面向', '編碼', '原因說明'],
+      rows: [
+        { domain: '<strong>C1. 藥物選擇</strong>', codes: [
+          ['C1.1', '不適當用藥（禁忌 / 無適應症）'],
+          ['C1.2', '無藥品適應症'],
+          ['C1.3', '不適當的藥物交互作用'],
+          ['C1.4', '重複用藥（活性成分或作用機轉相同）'],
+          ['C1.5', '有適應症卻未給藥'],
+          ['C1.6', '同適應症使用太多種藥（非必要多重用藥）'],
+        ]},
+        { domain: '<strong>C2. 劑型選擇</strong>', codes: [
+          ['C2.1', '藥物劑型 / 配方不適宜'],
+        ]},
+        { domain: '<strong>C3. 劑量選擇</strong>', codes: [
+          ['C3.1', '劑量過低'],
+          ['C3.2', '劑量過高'],
+          ['C3.3', '給藥頻次不足'],
+          ['C3.4', '給藥頻次過多'],
+          ['C3.5', '用藥時間指示錯誤 / 不清楚'],
+        ]},
+        { domain: '<strong>C4. 療程長短</strong>', codes: [
+          ['C4.1', '療程過短'],
+          ['C4.2', '療程過長'],
+        ]},
+        { domain: '<strong>C5. 調劑問題</strong>', codes: [
+          ['C5.1', '處方藥物無法獲得（缺藥）'],
+          ['C5.2', '未提供必要資訊 / 提供錯誤資訊'],
+          ['C5.3', '調劑了錯誤藥物 / 規格 / 劑量（OTC）'],
+          ['C5.4', '調劑了錯誤的藥物或規格'],
+        ]},
+        { domain: '<strong>C6. 給藥過程</strong><br><small>醫療人員 / 照顧者</small>', codes: [
+          ['C6.1', '給藥時間或間隔不適當'],
+          ['C6.2', '給予劑量不足'],
+          ['C6.3', '給予劑量過量'],
+          ['C6.4', '未給予藥物'],
+          ['C6.5', '給錯藥物'],
+          ['C6.6', '給藥途徑錯誤'],
+        ]},
+        { domain: '<strong>C7. 病人因素</strong>', codes: [
+          ['C7.1', '故意少用或不服藥'],
+          ['C7.2', '服用超出處方劑量'],
+          ['C7.3', '濫用藥物'],
+          ['C7.4', '服用不必要的藥物'],
+          ['C7.5', '食物交互作用'],
+          ['C7.6', '儲存藥品不適當'],
+          ['C7.7', '服藥時間 / 間隔不適當'],
+          ['C7.8', '無意間以錯誤方式服藥'],
+          ['C7.9', '因生理因素無法依指示使用（如磨粉）'],
+          ['C7.10', '無法正確理解服藥說明'],
+        ]},
+        { domain: '<strong>C8. 照護轉銜</strong>', codes: [
+          ['C8.1', '用藥連貫性問題（跨科 / 跨院）'],
+        ]},
+        { domain: '<strong>C9. 其他</strong>', codes: [
+          ['C9.1', '未進行適當的療效監測（如 TDM）'],
+          ['C9.2', '無原因（需詳細說明）'],
+          ['C9.3', '正常使用但就有 ADR（無法預期的反應）'],
+        ]},
+      ]
+    },
+    I: {
+      title: '介入類別（Interventions）',
+      subtitle: '記錄藥師實際做了什麼，而非建議做什麼',
+      cols: ['主要面向', '編碼', '介入說明'],
+      rows: [
+        { domain: '<strong>I0. 未介入</strong>', codes: [
+          ['I0.1', '未介入（識別 DRP 但決定不介入時仍須記錄）'],
+        ]},
+        { domain: '<strong>I1. 醫師層面</strong>', codes: [
+          ['I1.1', '僅知會醫師，沒有建議或討論'],
+          ['I1.2', '要求醫師提供資訊'],
+          ['I1.3', '提供明確建議給醫師（無討論）'],
+          ['I1.4', '與醫師討論不同建議方案'],
+        ]},
+        { domain: '<strong>I2. 病人層面</strong>', codes: [
+          ['I2.1', '藥物諮詢'],
+          ['I2.2', '（僅）提供書面資料'],
+          ['I2.3', '將病人轉介給處方醫師'],
+          ['I2.4', '口述給家庭成員 / 照顧者'],
+        ]},
+        { domain: '<strong>I3. 藥物層面</strong>', codes: [
+          ['I3.1', '藥物調整'],
+          ['I3.2', '劑量調整（含劑量、頻次）'],
+          ['I3.3', '劑型調整'],
+          ['I3.4', '使用方法調整（療程、飯前後、藥袋指示）'],
+          ['I3.5', '停用藥物'],
+          ['I3.6', '啟用新藥物'],
+        ]},
+        { domain: '<strong>I4. 其他介入</strong>', codes: [
+          ['I4.1', '其他介入（如轉介營養師）'],
+          ['I4.2', '通報副作用給相關部門'],
+        ]},
+      ]
     }
   };
 
@@ -1667,6 +1789,26 @@
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeRefModal();
+  });
+
+  // ── DRP 潛在/明顯 Picker ──────────────────────────────
+  function pickDRP(btn, type) {
+    const picker = btn.closest('.drp-picker');
+    picker.querySelectorAll('.drp-pick-btn').forEach(b => {
+      b.classList.remove('selected-potential', 'selected-manifest');
+    });
+    btn.classList.add('selected-' + type);
+    event.stopPropagation();
+  }
+
+  // 自動在所有題目投影片的 answer-blank 前插入 picker
+  document.querySelectorAll('.case .answer-blank').forEach(div => {
+    const picker = document.createElement('div');
+    picker.className = 'drp-picker';
+    picker.innerHTML = '<span class="drp-picker-label">這個 DRP 是：</span>'
+      + '<button class="drp-pick-btn" onclick="pickDRP(this,\'potential\')">□ 潛在的問題</button>'
+      + '<button class="drp-pick-btn" onclick="pickDRP(this,\'manifest\')">■ 明顯的問題</button>';
+    div.parentNode.insertBefore(picker, div);
   });
 </script>
 </body>
