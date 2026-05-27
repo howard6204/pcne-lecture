@@ -362,6 +362,11 @@
       border-radius: 40px;
       backdrop-filter: blur(6px);
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    #toolbar:hover, #toolbar.visible {
+      opacity: 1;
     }
     .tb-btn {
       background: transparent;
@@ -1152,6 +1157,21 @@
   function toggleNotes() {
     Reveal.getPlugin('notes').open();
   }
+
+  // ── 工具列自動淡入淡出 ──────────────────────────
+  (function() {
+    const tb = document.getElementById('toolbar');
+    let hideTimer;
+    function showBar() {
+      tb.classList.add('visible');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => tb.classList.remove('visible'), 3000);
+    }
+    document.addEventListener('mousemove', showBar);
+    document.addEventListener('keydown', showBar);
+    tb.addEventListener('mouseenter', () => { clearTimeout(hideTimer); tb.classList.add('visible'); });
+    tb.addEventListener('mouseleave', () => { hideTimer = setTimeout(() => tb.classList.remove('visible'), 1500); });
+  })();
 
   // ── 案例答案揭示 ──────────────────────────────
   function initAnswerCovers() {
