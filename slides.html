@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCNE-DRP 概論 | 張綜瑋 藥師</title>
+
+  <!-- Reveal.js core -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Chalkboard plugin CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+
+  <style>
+    /* ── 色彩系統 ── */
+    :root {
+      --primary:  #3D5A78;
+      --accent:   #4E7A5A;
+      --light:    #F0ECE8;
+      --warn:     #F2E8D8;
+      --warn-border: #C4A882;
+      --bg:       #FDFBF9;
+      --text:     #3A3530;
+    }
+
+    /* ── 基礎版面 ── */
+    .reveal-viewport { background: var(--bg); }
+
+    .reveal {
+      font-family: 'Noto Sans TC', sans-serif;
+      color: var(--text);
+      font-size: 32px;
+    }
+
+    .reveal .slides section {
+      background: var(--bg);
+      text-align: left;
+      padding: 40px 60px;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    /* 頂部色帶 */
+    .reveal .slides section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    /* 頁尾 */
+    .reveal .slides section::after {
+      content: 'PCNE-DRP 概論 | 員林基督教醫院 張綜瑋 藥師';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: var(--primary);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.42em;
+      padding: 5px 20px;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    /* ── 標題 ── */
+    .reveal h1 {
+      color: var(--primary);
+      font-size: 1.8em;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    .reveal h2 {
+      color: var(--primary);
+      font-size: 1.4em;
+      margin-bottom: 16px;
+    }
+    .reveal h3 {
+      color: var(--accent);
+      font-size: 1.1em;
+      margin: 14px 0 8px;
+    }
+
+    /* ── 表格 ── */
+    .reveal table {
+      font-size: 0.78em;
+      border-collapse: collapse;
+      width: 100%;
+      margin: 12px 0;
+    }
+    .reveal table th {
+      background: var(--primary);
+      color: #fff;
+      padding: 8px 12px;
+    }
+    .reveal table td { padding: 7px 12px; }
+    .reveal table tr:nth-child(even) td { background: #F5F2EE; }
+    .reveal table tr:hover td { background: #EDE8E3; }
+
+    /* ── 引用 ── */
+    .reveal blockquote {
+      background: var(--warn);
+      border-left: 4px solid var(--warn-border);
+      border-radius: 6px;
+      padding: 12px 18px;
+      margin: 16px 0;
+      font-style: normal;
+      color: var(--text);
+      box-shadow: none;
+      width: auto;
+    }
+
+    /* ── 程式碼 ── */
+    .reveal code {
+      background: #EDE8E3;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      color: var(--primary);
+    }
+    .reveal pre {
+      background: #EDE8E3;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 0.7em;
+      line-height: 1.7;
+      box-shadow: none;
+    }
+
+    /* ── 封面投影片 ── */
+    .reveal .slides section.lead {
+      background: linear-gradient(135deg, #C8D5DF 0%, #D5E0D5 60%, #DDD5CC 100%);
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px;
+    }
+    .reveal .slides section.lead::before { display: none; }
+    .reveal .slides section.lead::after  { display: none; }
+    .reveal .slides section.lead h1 {
+      color: #3D5A78;
+      font-size: 2em;
+      border-bottom: 2px solid rgba(61,90,120,0.3);
+    }
+    .reveal .slides section.lead h2 {
+      color: #5A6A58;
+      font-size: 1.1em;
+      font-weight: 400;
+      margin: 6px 0 24px;
+    }
+
+    /* ── 章節封面 ── */
+    .reveal .slides section.section-cover {
+      background: linear-gradient(135deg, #D5DDE5 0%, #E0E8DF 100%);
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .reveal .slides section.section-cover::before { display: none; }
+    .reveal .slides section.section-cover::after  { display: none; }
+    .reveal .slides section.section-cover h1 {
+      color: var(--primary);
+      font-size: 2em;
+      border-bottom: 2px solid rgba(61,90,120,0.3);
+    }
+
+    /* ── 結尾投影片 ── */
+    .reveal .slides section.end {
+      background: linear-gradient(135deg, #3D5A78 0%, #4E7A5A 100%);
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    .reveal .slides section.end::before { display: none; }
+    .reveal .slides section.end::after  { display: none; }
+    .reveal .slides section.end h1 { color: #fff; border: none; font-size: 1.6em; }
+    .reveal .slides section.end p  { color: rgba(255,255,255,0.85); font-size: 0.9em; }
+
+    /* ── 案例投影片 ── */
+    .reveal .slides section.case {
+      background: #F8F5F0;
+    }
+    .reveal .slides section.case h2 {
+      border-left: 5px solid var(--accent);
+      padding-left: 14px;
+      background: rgba(78,122,90,0.08);
+      border-radius: 0 6px 6px 0;
+      padding: 6px 14px;
+    }
+
+    /* ── 演講者卡片 ── */
+    .presenter-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 28px;
+      padding: 14px 22px;
+      background: rgba(255,255,255,0.45);
+      border-radius: 12px;
+      width: fit-content;
+      border: 1px solid rgba(61,90,120,0.2);
+    }
+    .avatar-inline {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(61,90,120,0.3);
+      flex-shrink: 0;
+    }
+    .presenter-info {
+      color: #4A4540;
+      font-size: 0.78em;
+      line-height: 1.7;
+    }
+    .presenter-info strong { color: #3D5A78; font-size: 1.05em; }
+
+    /* ── AB 比較格 ── */
+    .ab-row {
+      display: flex;
+      gap: 16px;
+      margin: 14px 0;
+    }
+    .ab-cell {
+      flex: 1;
+      border: 2px dashed #7A8FA6;
+      border-radius: 8px;
+      padding: 14px 16px;
+      min-height: 80px;
+      background: #F0ECE8;
+    }
+    .ab-label {
+      font-size: 0.65em;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── 鍵盤提示浮層 ── */
+    #key-hint {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      background: rgba(61,90,120,0.88);
+      color: #fff;
+      font-size: 12px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      line-height: 1.8;
+      z-index: 9999;
+      font-family: 'Noto Sans TC', sans-serif;
+      pointer-events: none;
+    }
+    #key-hint kbd {
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 鍵盤提示 -->
+<div id="key-hint">
+  <kbd>→</kbd> 下一頁 &nbsp;
+  <kbd>C</kbd> 畫筆 &nbsp;
+  <kbd>B</kbd> 黑板 &nbsp;
+  <kbd>Del</kbd> 清除 &nbsp;
+  <kbd>S</kbd> 備忘稿
+</div>
+
+<div class="reveal">
+  <div class="slides">
+    <section
+      data-markdown="pcne-slides.md"
+      data-separator="^---$"
+      data-separator-vertical="^--$"
+      data-notes="^Note:"
+      data-charset="UTF-8">
+    </section>
+  </div>
+</div>
+
+<!-- Reveal.js core -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+
+<!-- Chalkboard plugin -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/plugin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    transitionSpeed: 'fast',
+    width: 1280,
+    height: 720,
+    margin: 0,
+
+    chalkboard: {
+      boardmarkerWidth: 3,
+      chalkWidth: 4,
+      chalkEffect: 0.5,
+      storage: 'pcne-chalkboard',
+      src: null,
+      readOnly: false,
+      toggleChalkboardButton: { left: '80px', bottom: '30px', top: 'auto', right: 'auto' },
+      toggleNotesButton: { left: '130px', bottom: '30px', top: 'auto', right: 'auto' },
+    },
+
+    customcontrols: {
+      controls: [
+        {
+          icon: '<i class="fa fa-pen-square"></i>',
+          title: '畫筆 (C)',
+          action: 'RevealChalkboard.toggleNotesCanvas();'
+        },
+        {
+          icon: '<i class="fa fa-chalkboard"></i>',
+          title: '黑板 (B)',
+          action: 'RevealChalkboard.toggleChalkboard();'
+        },
+        {
+          icon: '<i class="fa fa-trash"></i>',
+          title: '清除 (Del)',
+          action: 'RevealChalkboard.clear();'
+        }
+      ]
+    },
+
+    keyboard: {
+      67: () => RevealChalkboard.toggleNotesCanvas(),  // C
+      66: () => RevealChalkboard.toggleChalkboard(),   // B
+      46: () => RevealChalkboard.clear(),              // Del
+    },
+
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealChalkboard, RevealCustomControls],
+  });
+
+  // 自動隱藏鍵盤提示
+  setTimeout(() => {
+    const hint = document.getElementById('key-hint');
+    if (hint) { hint.style.transition = 'opacity 1s'; hint.style.opacity = '0'; }
+  }, 6000);
+</script>
+</body>
+</html>

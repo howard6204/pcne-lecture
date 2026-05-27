@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCNE-DRP 概論 | 張綜瑋 藥師</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #3D5A78;
+      --accent:  #4E7A5A;
+      --bg:      #FDFBF9;
+      --light:   #F0ECE8;
+      --text:    #3A3530;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── 頂部色帶 ── */
+    .topbar {
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #C8D5DF 0%, #D5E0D5 60%, #DDD5CC 100%);
+      padding: 56px 32px 48px;
+      text-align: center;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(61,90,120,0.15);
+      color: var(--primary);
+      font-size: 0.78em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      color: var(--primary);
+      font-size: 2.4em;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    .hero h2 {
+      color: #5A6A58;
+      font-size: 1.05em;
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+
+    /* ── 演講者卡片 ── */
+    .presenter {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(61,90,120,0.2);
+      border-radius: 14px;
+      padding: 14px 22px;
+    }
+    .presenter img {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(61,90,120,0.3);
+    }
+    .presenter-info { text-align: left; }
+    .presenter-info .name { font-weight: 700; color: var(--primary); font-size: 1em; }
+    .presenter-info .org  { font-size: 0.78em; color: #5A5550; margin-top: 2px; line-height: 1.5; }
+
+    /* ── 主體 ── */
+    .main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      flex: 1;
+    }
+
+    /* ── CTA 按鈕區 ── */
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-size: 0.95em;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: opacity .15s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-outline  {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    /* ── 課程大綱卡片 ── */
+    .section-title {
+      font-size: 1em;
+      font-weight: 700;
+      color: var(--primary);
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+      margin-bottom: 16px;
+    }
+    .outline-list {
+      list-style: none;
+      counter-reset: outline-counter;
+    }
+    .outline-list li {
+      counter-increment: outline-counter;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid #EDE8E3;
+      font-size: 0.9em;
+    }
+    .outline-list li:last-child { border-bottom: none; }
+    .outline-list li::before {
+      content: counter(outline-counter);
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75em;
+      font-weight: 700;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .card {
+      background: var(--light);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+    }
+
+    /* ── 講義領取表單 ── */
+    .form-box {
+      background: #fff;
+      border: 2px solid #D5DDE5;
+      border-radius: 12px;
+      padding: 28px 28px 24px;
+      margin-bottom: 32px;
+    }
+    .form-box h3 {
+      color: var(--primary);
+      font-size: 1em;
+      margin-bottom: 6px;
+    }
+    .form-box p {
+      font-size: 0.82em;
+      color: #666;
+      margin-bottom: 18px;
+    }
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
+    .form-row input[type="email"] {
+      flex: 1;
+      padding: 11px 14px;
+      border: 1.5px solid #C8D0D8;
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: 0.9em;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .form-row input[type="email"]:focus { border-color: var(--primary); }
+    .form-row button {
+      padding: 11px 20px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: 0.9em;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity .15s;
+    }
+    .form-row button:hover { opacity: 0.85; }
+    .form-row button:disabled { opacity: 0.5; cursor: default; }
+    .form-msg {
+      margin-top: 10px;
+      font-size: 0.82em;
+      min-height: 20px;
+    }
+    .form-msg.ok   { color: var(--accent); }
+    .form-msg.err  { color: #c0392b; }
+
+    /* ── 頁尾 ── */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.75em;
+      text-align: center;
+      padding: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar"></div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="badge">藥事照護專業藥師培訓課程</div>
+  <h1>PCNE-DRP 概論</h1>
+  <h2>Drug-Related Problems Classification — PCNE v9.1</h2>
+  <div class="presenter">
+    <img src="assets/avatar.jpg" alt="張綜瑋 藥師"
+         onerror="this.style.display='none'">
+    <div class="presenter-info">
+      <div class="name">張綜瑋 藥師</div>
+      <div class="org">
+        彰化基督教醫療財團法人 員林基督教醫院<br>
+        中華民國藥師公會全國聯合會
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 主體 -->
+<div class="main">
+
+  <!-- 快速連結 -->
+  <div class="cta-row" style="margin-top:36px;">
+    <a href="slides.html" class="btn btn-primary">▶ 開啟互動式簡報</a>
+  </div>
+
+  <!-- 講義領取 -->
+  <div class="form-box">
+    <h3>📄 領取課程講義 PDF</h3>
+    <p>輸入您的 Email，系統將自動寄送講義下載連結。</p>
+    <div class="form-row">
+      <input type="email" id="email-input" placeholder="your@email.com">
+      <button id="submit-btn" onclick="submitEmail()">取得講義</button>
+    </div>
+    <div class="form-msg" id="form-msg"></div>
+  </div>
+
+  <!-- 課程大綱 -->
+  <div class="card">
+    <div class="section-title">課程大綱</div>
+    <ol class="outline-list">
+      <li>前言：藥事照護與記錄的重要性</li>
+      <li>藥事評估與紀錄工具比較</li>
+      <li>藥師介入決策框架</li>
+      <li>PCNE v9.1 架構總覽（P → C → I → A → O）</li>
+      <li>五大領域詳解</li>
+      <li>PCNE 在研究中的應用</li>
+      <li>案例練習（社區 11 題）</li>
+    </ol>
+  </div>
+
+</div>
+
+<footer>
+  PCNE-DRP 概論 &nbsp;|&nbsp; 員林基督教醫院 藥劑科 &nbsp;|&nbsp; 張綜瑋 藥師
+</footer>
+
+<script>
+  // ── Make.com webhook URL（上線後替換）──
+  const WEBHOOK_URL = 'https://hook.make.com/YOUR_WEBHOOK_ID';
+  const PDF_URL = window.location.origin + '/handout.pdf';
+
+  async function submitEmail() {
+    const input = document.getElementById('email-input');
+    const btn   = document.getElementById('submit-btn');
+    const msg   = document.getElementById('form-msg');
+    const email = input.value.trim();
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      msg.className = 'form-msg err';
+      msg.textContent = '請輸入有效的 Email 地址。';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = '寄送中…';
+    msg.className = 'form-msg';
+    msg.textContent = '';
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          pdf_url: PDF_URL,
+          course: 'PCNE-DRP 概論',
+          submitted_at: new Date().toISOString(),
+        }),
+      });
+      msg.className = 'form-msg ok';
+      msg.textContent = '✓ 已寄出！請查收您的信箱（可能需要 1–2 分鐘）。';
+      input.value = '';
+    } catch (e) {
+      msg.className = 'form-msg err';
+      msg.textContent = '寄送失敗，請稍後再試。';
+    }
+
+    btn.disabled = false;
+    btn.textContent = '取得講義';
+  }
+
+  // Enter 鍵送出
+  document.getElementById('email-input')
+    .addEventListener('keydown', e => { if (e.key === 'Enter') submitEmail(); });
+</script>
+</body>
+</html>
