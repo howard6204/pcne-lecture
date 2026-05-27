@@ -268,39 +268,84 @@
       font-family: monospace;
     }
 
-    /* ── 全螢幕按鈕 ── */
-    #fs-btn {
+    /* ── 功能按鈕列 ── */
+    #toolbar {
       position: fixed;
-      top: 14px;
-      right: 14px;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 9999;
-      background: rgba(61,90,120,0.75);
+      display: flex;
+      gap: 8px;
+      background: rgba(30, 42, 56, 0.82);
+      padding: 8px 14px;
+      border-radius: 40px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .tb-btn {
+      background: transparent;
       color: #fff;
       border: none;
-      border-radius: 7px;
-      padding: 6px 10px;
-      font-size: 18px;
+      border-radius: 8px;
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
       cursor: pointer;
-      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: background .15s;
+      position: relative;
     }
-    #fs-btn:hover { background: rgba(61,90,120,1); }
+    .tb-btn:hover { background: rgba(255,255,255,0.15); }
+    .tb-btn.active { background: rgba(255,255,255,0.25); }
+    .tb-btn .label {
+      position: absolute;
+      bottom: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      white-space: nowrap;
+      color: rgba(255,255,255,0.7);
+      font-family: 'Noto Sans TC', sans-serif;
+      pointer-events: none;
+    }
+    .tb-sep {
+      width: 1px;
+      background: rgba(255,255,255,0.2);
+      margin: 4px 2px;
+    }
   </style>
 </head>
 
 <body>
 
-<!-- 全螢幕按鈕 -->
-<button id="fs-btn" title="全螢幕 (F)" onclick="toggleFS()">⛶</button>
-
-<!-- 鍵盤提示 -->
-<div id="key-hint">
-  <kbd>F</kbd> 全螢幕 &nbsp;
-  <kbd>→</kbd> 下一頁 &nbsp;
-  <kbd>C</kbd> 畫筆 &nbsp;
-  <kbd>B</kbd> 黑板 &nbsp;
-  <kbd>Del</kbd> 清除 &nbsp;
-  <kbd>S</kbd> 備忘稿
+<!-- 功能按鈕列 -->
+<div id="toolbar">
+  <button class="tb-btn" title="上一頁 (←)" onclick="Reveal.prev()">◀
+    <span class="label">上一頁</span>
+  </button>
+  <button class="tb-btn" title="下一頁 (→)" onclick="Reveal.next()">▶
+    <span class="label">下一頁</span>
+  </button>
+  <div class="tb-sep"></div>
+  <button class="tb-btn" id="btn-pen" title="畫筆 (C)" onclick="togglePen()">✏️
+    <span class="label">畫筆</span>
+  </button>
+  <button class="tb-btn" id="btn-board" title="黑板 (B)" onclick="toggleBoard()">🖊
+    <span class="label">黑板</span>
+  </button>
+  <button class="tb-btn" title="清除 (Del)" onclick="RevealChalkboard.clear()">🗑
+    <span class="label">清除</span>
+  </button>
+  <div class="tb-sep"></div>
+  <button class="tb-btn" title="備忘稿 (S)" onclick="toggleNotes()">📋
+    <span class="label">備忘稿</span>
+  </button>
+  <button class="tb-btn" id="btn-fs" title="全螢幕 (F)" onclick="toggleFS()">⛶
+    <span class="label">全螢幕</span>
+  </button>
 </div>
 
 <div class="reveal">
@@ -375,28 +420,43 @@
     plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealChalkboard, RevealCustomControls],
   });
 
-  // 全螢幕切換
+  // 全螢幕
   function toggleFS() {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
-      document.getElementById('fs-btn').textContent = '✕';
-      document.getElementById('fs-btn').title = '離開全螢幕 (Esc)';
     } else {
       document.exitFullscreen();
     }
   }
   document.addEventListener('fullscreenchange', () => {
-    if (!document.fullscreenElement) {
-      document.getElementById('fs-btn').textContent = '⛶';
-      document.getElementById('fs-btn').title = '全螢幕 (F)';
-    }
+    const btn = document.getElementById('btn-fs');
+    btn.textContent = document.fullscreenElement ? '✕' : '⛶';
+    btn.querySelector('.label').textContent = document.fullscreenElement ? '離開' : '全螢幕';
   });
 
-  // 自動隱藏鍵盤提示
-  setTimeout(() => {
-    const hint = document.getElementById('key-hint');
-    if (hint) { hint.style.transition = 'opacity 1s'; hint.style.opacity = '0'; }
-  }, 6000);
+  // 畫筆
+  let penActive = false;
+  function togglePen() {
+    RevealChalkboard.toggleNotesCanvas();
+    penActive = !penActive;
+    document.getElementById('btn-pen').classList.toggle('active', penActive);
+  }
+
+  // 黑板
+  let boardActive = false;
+  function toggleBoard() {
+    RevealChalkboard.toggleChalkboard();
+    boardActive = !boardActive;
+    document.getElementById('btn-board').classList.toggle('active', boardActive);
+  }
+
+  // 備忘稿
+  function toggleNotes() {
+    const notesWin = window.open('', 'notes');
+    if (!notesWin || notesWin.closed) {
+      Reveal.getPlugin('notes').open();
+    }
+  }
 </script>
 </body>
 </html>
