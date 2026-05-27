@@ -443,6 +443,7 @@
     /* ── 案例答案揭示 ── */
     .code-box {
       position: relative;
+      min-height: 80px;
     }
     .answer-cover {
       position: absolute;
@@ -1153,16 +1154,26 @@
   }
 
   // ── 案例答案揭示 ──────────────────────────────
-  document.querySelectorAll('.code-box').forEach(box => {
-    const cover = document.createElement('div');
-    cover.className = 'answer-cover';
-    cover.textContent = '▶ 點擊查看答案';
-    box.appendChild(cover);
-    cover.addEventListener('click', e => {
-      e.stopPropagation();
-      cover.classList.add('revealed');
+  function initAnswerCovers() {
+    document.querySelectorAll('.code-box').forEach(box => {
+      if (box.querySelector('.answer-cover')) return; // 避免重複
+      const cover = document.createElement('div');
+      cover.className = 'answer-cover';
+      cover.innerHTML = '▶ 點擊查看答案';
+      box.style.minHeight = '80px';
+      box.appendChild(cover);
+      cover.addEventListener('click', e => {
+        e.stopPropagation();
+        cover.classList.add('revealed');
+      });
     });
-  });
+  }
+  // Reveal 就緒後執行，也保留 DOMContentLoaded 備用
+  if (typeof Reveal !== 'undefined') {
+    Reveal.on('ready', initAnswerCovers);
+  } else {
+    document.addEventListener('DOMContentLoaded', initAnswerCovers);
+  }
 
   // ── P/C/I 代碼查詢浮窗 ──────────────────────────
   const CODE_DATA = {
