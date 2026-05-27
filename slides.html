@@ -288,10 +288,13 @@
 
     /* ── 各國比較表 PCNE 列 ── */
     .pcne-row td { background: #FEF0E8; font-weight: 700; color: #3D5A78; }
-    .sys-table { font-size: 0.62em; }
-    .sys-table th, .sys-table td { text-align: center; padding: 5px 8px; }
+    .sys-table { font-size: 0.54em; width: 100%; border-collapse: collapse; }
+    .sys-table th, .sys-table td { text-align: center; padding: 3px 6px; border-bottom: 1px solid #DDD; }
     .sys-table th:first-child, .sys-table td:first-child { text-align: left; }
-    .sys-ref { font-size: 0.58em; color: #777; text-align: right; margin-top: 6px; }
+    .sys-table thead th { background: #E8EEF4; font-weight: 700; }
+    .sys-ref { font-size: 0.52em; color: #777; text-align: right; margin-top: 4px; }
+    .section-dense { padding: 28px 50px 20px !important; }
+    .section-dense h2 { margin-bottom: 8px !important; }
 
     /* ── 問答互動頁 ── */
     .quiz-wrap {
@@ -497,7 +500,7 @@
 <aside class="notes">這張表格讓大家看清楚各工具的定位，以便選擇合適的工具，而非「只用一種」。<br>SOAP 是大家最熟悉的——它跟 PCNE 可以並用，SOAP 負責敘述、PCNE 負責打代碼。<br>Beers/STOPP 是篩查工具，找到問題後，下一步如何介入、介入結果如何，才需要 PCNE 記錄。<br>PCNE 唯一的缺點是學習曲線，需要熟悉代碼，但一旦熟練，記錄速度非常快。</aside>
 </section>
 
-<section>
+<section class="section-dense">
 <h2>各國 DRP 分類系統比較</h2>
 <table class="sys-table"><thead><tr><th>各國系統</th><th>分類數</th><th>清楚定義</th><th>問題分層</th><th>原因分類</th><th>信效度</th><th>介入分類</th><th>研究發表</th></tr></thead><tbody>
 <tr><td>ABC</td><td>3</td><td>N</td><td>N</td><td>I</td><td>N</td><td>N</td><td>N</td></tr>
