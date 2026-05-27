@@ -40,33 +40,8 @@
     .reveal .slides section {
       background: var(--bg);
       text-align: left;
-      padding: 40px 60px;
-      height: 100%;
+      padding: 40px 60px 60px;
       box-sizing: border-box;
-      position: relative;
-      overflow: visible;
-    }
-
-    /* 頂部色帶 */
-    .reveal .slides section::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 6px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      z-index: 10;
-    }
-
-    /* 頁尾 */
-    .reveal .slides section::after {
-      content: 'PCNE-DRP 概論 | 員林基督教醫院 張綜瑋 藥師';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: var(--primary);
-      color: rgba(255,255,255,0.85);
-      font-size: 0.42em;
-      padding: 5px 20px;
-      font-family: 'Noto Sans TC', sans-serif;
     }
 
     /* ── 標題 ── */
@@ -143,8 +118,6 @@
       justify-content: center;
       padding: 60px;
     }
-    .reveal .slides section.lead::before { display: none; }
-    .reveal .slides section.lead::after  { display: none; }
     .reveal .slides section.lead h1 {
       color: #3D5A78;
       font-size: 2em;
@@ -164,8 +137,6 @@
       flex-direction: column;
       justify-content: center;
     }
-    .reveal .slides section.section-cover::before { display: none; }
-    .reveal .slides section.section-cover::after  { display: none; }
     .reveal .slides section.section-cover h1 {
       color: var(--primary);
       font-size: 2em;
@@ -180,8 +151,6 @@
       justify-content: center;
       text-align: center;
     }
-    .reveal .slides section.end::before { display: none; }
-    .reveal .slides section.end::after  { display: none; }
     .reveal .slides section.end h1 { color: #fff; border: none; font-size: 1.6em; }
     .reveal .slides section.end p  { color: rgba(255,255,255,0.85); font-size: 0.9em; }
 
