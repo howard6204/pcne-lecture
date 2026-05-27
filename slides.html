@@ -839,8 +839,8 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
 
 <!-- Chalkboard plugin -->
-<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/plugin.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/rajgoel/reveal.js-plugins@4.2.2/chalkboard/plugin.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/rajgoel/reveal.js-plugins@4.2.2/customcontrols/plugin.js"></script>
 
 <script>
   Reveal.initialize({
@@ -889,7 +889,12 @@
       46: () => RevealChalkboard.clear(),              // Del
     },
 
-    plugins: [RevealHighlight, RevealNotes, RevealChalkboard, RevealCustomControls],
+    plugins: [
+      RevealHighlight,
+      RevealNotes,
+      ...(typeof RevealChalkboard !== 'undefined' ? [RevealChalkboard] : []),
+      ...(typeof RevealCustomControls !== 'undefined' ? [RevealCustomControls] : []),
+    ],
   });
 
   // 全螢幕
