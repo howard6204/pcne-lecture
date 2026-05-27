@@ -686,21 +686,21 @@
   <button onclick="showTab(this,'main')" class="tab-btn tab-active" style="flex:1;padding:14px;border-radius:10px;border:2px solid var(--primary);background:var(--primary);color:#fff;font-size:1em;font-weight:700;cursor:pointer;font-family:inherit;">主分類（大分類）</button>
   <button onclick="showTab(this,'sub')"  class="tab-btn"             style="flex:1;padding:14px;border-radius:10px;border:2px solid var(--primary);background:transparent;color:var(--primary);font-size:1em;font-weight:700;cursor:pointer;font-family:inherit;">次分類（小分類）</button>
 </div>
-<div id="tab-main" class="tab-panel">
-  <ul>
+<div id="tab-main" class="tab-panel" style="margin-top:20px;">
+  <ul style="display:flex;flex-direction:column;gap:10px;">
     <li>僅需統計 DRP <strong>類型</strong>與<strong>發生率</strong>時</li>
     <li>作為藥事照護工作流程的<strong>效率指標</strong></li>
     <li>初學者、快速記錄、日常業務量統計</li>
   </ul>
-  <blockquote>例：P1 / P2 / P3 &nbsp;｜&nbsp; C1 / C7 &nbsp;｜&nbsp; I1 / I2</blockquote>
+  <blockquote style="margin-top:16px;">例：P1 / P2 / P3 &nbsp;｜&nbsp; C1 / C7 &nbsp;｜&nbsp; I1 / I2</blockquote>
 </div>
-<div id="tab-sub" class="tab-panel" style="display:none;">
-  <ul>
+<div id="tab-sub" class="tab-panel" style="display:none;margin-top:20px;">
+  <ul style="display:flex;flex-direction:column;gap:10px;">
     <li>需追蹤<strong>細節原因</strong>與具體介入方式</li>
     <li>藥事照護<strong>訓練與品質評估</strong>研究</li>
     <li>發表論文、申報品質指標、機構比較分析</li>
   </ul>
-  <blockquote>例：P1.1 / P1.2 / P1.3 &nbsp;｜&nbsp; C7.1 / C7.9 / C7.10 &nbsp;｜&nbsp; I1.1 / I1.4</blockquote>
+  <blockquote style="margin-top:16px;">例：P1.1 / P1.2 / P1.3 &nbsp;｜&nbsp; C7.1 / C7.9 / C7.10 &nbsp;｜&nbsp; I1.1 / I1.4</blockquote>
 </div>
 <aside class="notes">PCNE 的每個領域都有主分類和次分類，這一頁說明什麼情況用哪一種。<br>如果你只是要統計「這個月發現了幾個療效問題、幾個安全問題」，主分類就夠了，操作也最快。<br>如果要做比較深入的研究、訓練評估，或是需要了解「到底是哪種原因最常發生」，就需要次分類。<br>建議初學者從主分類開始練習，等熟悉邏輯之後再加入次分類。</aside>
 </section>
