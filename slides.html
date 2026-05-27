@@ -267,13 +267,35 @@
       padding: 1px 5px;
       font-family: monospace;
     }
+
+    /* ── 全螢幕按鈕 ── */
+    #fs-btn {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 9999;
+      background: rgba(61,90,120,0.75);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 6px 10px;
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 1;
+      transition: background .15s;
+    }
+    #fs-btn:hover { background: rgba(61,90,120,1); }
   </style>
 </head>
 
 <body>
 
+<!-- 全螢幕按鈕 -->
+<button id="fs-btn" title="全螢幕 (F)" onclick="toggleFS()">⛶</button>
+
 <!-- 鍵盤提示 -->
 <div id="key-hint">
+  <kbd>F</kbd> 全螢幕 &nbsp;
   <kbd>→</kbd> 下一頁 &nbsp;
   <kbd>C</kbd> 畫筆 &nbsp;
   <kbd>B</kbd> 黑板 &nbsp;
@@ -351,6 +373,23 @@
     },
 
     plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealChalkboard, RevealCustomControls],
+  });
+
+  // 全螢幕切換
+  function toggleFS() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      document.getElementById('fs-btn').textContent = '✕';
+      document.getElementById('fs-btn').title = '離開全螢幕 (Esc)';
+    } else {
+      document.exitFullscreen();
+    }
+  }
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+      document.getElementById('fs-btn').textContent = '⛶';
+      document.getElementById('fs-btn').title = '全螢幕 (F)';
+    }
   });
 
   // 自動隱藏鍵盤提示
