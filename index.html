@@ -262,10 +262,10 @@
   <!-- 講義領取 -->
   <div class="form-box">
     <h3>📄 領取課程講義 PDF</h3>
-    <p>輸入您的 Email，系統將自動寄送講義下載連結。</p>
+    <p>輸入您的 Email，即可立即下載課程講義。</p>
     <div class="form-row">
       <input type="email" id="email-input" placeholder="your@email.com">
-      <button id="submit-btn" onclick="submitEmail()">取得講義</button>
+      <button id="submit-btn" onclick="submitEmail()">立即下載</button>
     </div>
     <div class="form-msg" id="form-msg"></div>
   </div>
@@ -291,11 +291,10 @@
 </footer>
 
 <script>
-  // ── Make.com webhook URL（上線後替換）──
-  const WEBHOOK_URL = 'https://hook.make.com/YOUR_WEBHOOK_ID';
-  const PDF_URL = window.location.origin + '/handout.pdf';
+  // ── GAS 記錄 Email 的 Web App URL（部署後替換）──
+  const GAS_URL = 'YOUR_GAS_WEBAPP_URL';
 
-  async function submitEmail() {
+  function submitEmail() {
     const input = document.getElementById('email-input');
     const btn   = document.getElementById('submit-btn');
     const msg   = document.getElementById('form-msg');
@@ -307,32 +306,33 @@
       return;
     }
 
-    btn.disabled = true;
-    btn.textContent = '寄送中…';
-    msg.className = 'form-msg';
-    msg.textContent = '';
+    // 立刻觸發下載
+    const a = document.createElement('a');
+    a.href = 'handout.pdf';
+    a.download = 'PCNE-DRP概論_講義.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 
-    try {
-      await fetch(WEBHOOK_URL, {
+    msg.className = 'form-msg ok';
+    msg.textContent = '✓ 講義下載中，請稍候…';
+    btn.disabled = true;
+    input.value = '';
+
+    // 背景記錄 Email（失敗不影響下載）
+    if (GAS_URL !== 'YOUR_GAS_WEBAPP_URL') {
+      fetch(GAS_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
-          pdf_url: PDF_URL,
           course: 'PCNE-DRP 概論',
-          submitted_at: new Date().toISOString(),
+          time: new Date().toISOString(),
         }),
-      });
-      msg.className = 'form-msg ok';
-      msg.textContent = '✓ 已寄出！請查收您的信箱（可能需要 1–2 分鐘）。';
-      input.value = '';
-    } catch (e) {
-      msg.className = 'form-msg err';
-      msg.textContent = '寄送失敗，請稍後再試。';
+      }).catch(() => {});
     }
 
-    btn.disabled = false;
-    btn.textContent = '取得講義';
+    setTimeout(() => { btn.disabled = false; }, 3000);
   }
 
   // Enter 鍵送出
