@@ -682,13 +682,27 @@
 
 <section>
 <h2>何時用主分類？何時用次分類？</h2>
-<h3>使用主分類（大分類）時
-- 僅追蹤 DRP 類型與發生率
-- 也可作為藥事照護工作流程的效率指標</h3>
-<h3>使用次分類（小分類）時
-- 追蹤主要面向與重要細節的資訊
-- 藥事照護工作的訓練與品質評估</h3>
-<aside class="notes">PCNE 的每個領域都有主分類和次分類，這一頁說明什麼情況用哪一種。<br>如果你只是要統計「這個月發現了幾個療效問題、幾個安全問題」，主分類就夠了，操作也最快。<br>如果要做比較深入的研究、訓練評估，或是需要了解「到底是哪種原因最常發生」，就需要次分類。<br>建議初學者從主分類開始練習，等熟悉邏輯之後再加入次分類。<br>在今天的案例練習中，我們會同時練習主次分類的應用。</aside>
+<div style="display:flex;gap:16px;margin:20px 0 14px;">
+  <button onclick="showTab(this,'main')" class="tab-btn tab-active" style="flex:1;padding:14px;border-radius:10px;border:2px solid var(--primary);background:var(--primary);color:#fff;font-size:1em;font-weight:700;cursor:pointer;font-family:inherit;">主分類（大分類）</button>
+  <button onclick="showTab(this,'sub')"  class="tab-btn"             style="flex:1;padding:14px;border-radius:10px;border:2px solid var(--primary);background:transparent;color:var(--primary);font-size:1em;font-weight:700;cursor:pointer;font-family:inherit;">次分類（小分類）</button>
+</div>
+<div id="tab-main" class="tab-panel">
+  <ul>
+    <li>僅需統計 DRP <strong>類型</strong>與<strong>發生率</strong>時</li>
+    <li>作為藥事照護工作流程的<strong>效率指標</strong></li>
+    <li>初學者、快速記錄、日常業務量統計</li>
+  </ul>
+  <blockquote>例：P1 / P2 / P3 &nbsp;｜&nbsp; C1 / C7 &nbsp;｜&nbsp; I1 / I2</blockquote>
+</div>
+<div id="tab-sub" class="tab-panel" style="display:none;">
+  <ul>
+    <li>需追蹤<strong>細節原因</strong>與具體介入方式</li>
+    <li>藥事照護<strong>訓練與品質評估</strong>研究</li>
+    <li>發表論文、申報品質指標、機構比較分析</li>
+  </ul>
+  <blockquote>例：P1.1 / P1.2 / P1.3 &nbsp;｜&nbsp; C7.1 / C7.9 / C7.10 &nbsp;｜&nbsp; I1.1 / I1.4</blockquote>
+</div>
+<aside class="notes">PCNE 的每個領域都有主分類和次分類，這一頁說明什麼情況用哪一種。<br>如果你只是要統計「這個月發現了幾個療效問題、幾個安全問題」，主分類就夠了，操作也最快。<br>如果要做比較深入的研究、訓練評估，或是需要了解「到底是哪種原因最常發生」，就需要次分類。<br>建議初學者從主分類開始練習，等熟悉邏輯之後再加入次分類。</aside>
 </section>
 
 <section class="section-cover">
@@ -1138,6 +1152,19 @@
       toggleChalkboardButton: false,
     },
   });
+
+  // 主/次分類 tab 切換
+  function showTab(btn, id) {
+    const section = btn.closest('section');
+    section.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+    section.querySelectorAll('.tab-btn').forEach(b => {
+      b.style.background = 'transparent';
+      b.style.color = 'var(--primary)';
+    });
+    document.getElementById('tab-' + id).style.display = 'block';
+    btn.style.background = 'var(--primary)';
+    btn.style.color = '#fff';
+  }
 
   // 全螢幕
   function toggleFS() {
