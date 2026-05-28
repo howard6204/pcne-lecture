@@ -944,9 +944,8 @@
 </section>
 
 <section>
-<h2>[原因 C]：9 個主分類，38 個次分類（1/2）</h2>
+<h2 style="color:#3D5A78;border-left:5px solid #3D5A78;padding-left:12px;">👨‍⚕️ 原因 C — 醫師端（C1–C4）</h2>
 <table class="sys-table" style="font-size:0.6em;"><thead><tr><th>代碼</th><th>主分類</th><th>次分類（含說明）</th></tr></thead><tbody>
-<tr class="c-grp-doc"><td colspan="3">👨‍⚕️ 醫師端（C1–C4）：處方 / 藥物選擇相關</td></tr>
 <tr><td><strong>C1</strong></td><td>藥物選擇</td><td>
   C1.1 不適當用藥（禁忌 / 無適應症）<br>
   C1.2 無藥品適應症<br>
@@ -958,7 +957,14 @@
 <tr><td><strong>C2</strong></td><td>劑型選擇</td><td>C2.1 藥物劑型 / 配方不適宜</td></tr>
 <tr><td><strong>C3</strong></td><td>劑量選擇</td><td>C3.1 劑量過低　C3.2 劑量過高<br>C3.3 給藥頻次不足　C3.4 給藥頻次過多<br>C3.5 用藥時間指示錯誤 / 不清楚</td></tr>
 <tr><td><strong>C4</strong></td><td>療程長短</td><td>C4.1 療程過短　C4.2 療程過長</td></tr>
-<tr class="c-grp-pharm"><td colspan="3">💊 藥師端（C5）：調劑相關</td></tr>
+</tbody></table>
+<button class="quick-ref-btn" onclick="showRefModal('C_doc');event.stopPropagation()">📋 醫師端速查表</button>
+<aside class="notes">C1 藥物選擇是最廣的一類——注意 C1.4 和 C1.6 的差別：C1.4 是相同成分重複開藥；C1.6 是同適應症但不同機轉、開了太多種藥。<br>C1.5「有病沒有藥」——有適應症卻沒有開藥，例如心衰竭病人沒開 ACEI/ARB。<br>C3 劑量問題——「過低」可能造成療效不足（P1），「過高」可能造成不良事件（P2）。</aside>
+</section>
+
+<section>
+<h2 style="color:#4E7A5A;border-left:5px solid #4E7A5A;padding-left:12px;">💊 原因 C — 藥師端（C5）</h2>
+<table class="sys-table" style="font-size:0.7em;"><thead><tr><th>代碼</th><th>主分類</th><th>次分類（含說明）</th></tr></thead><tbody>
 <tr><td><strong>C5</strong></td><td>調劑問題</td><td>
   C5.1 處方藥物無法獲得 <span class="code-tag">缺藥</span><br>
   C5.2 未提供必要資訊 / 提供錯誤資訊<br>
@@ -966,19 +972,26 @@
   C5.4 調劑了錯誤的藥物或規格
 </td></tr>
 </tbody></table>
-<aside class="notes">C1 到 C5 的原因，主要是「處方或藥品本身」的問題。<br>C1 藥物選擇是最廣的一類——注意 C1.4 和 C1.6 的差別：C1.4 是相同成分重複開藥；C1.6 是同適應症但不同機轉、開了太多種藥。<br>C1.5「有病沒有藥」——有適應症卻沒有開藥，例如心衰竭病人沒開 ACEI/ARB。<br>C5.1「缺藥」——處方開了但拿不到，常見於特殊藥物或急性缺貨。<br>C3 劑量問題——「過低」可能造成療效不足（P1），「過高」可能造成不良事件（P2）。</aside>
+<button class="quick-ref-btn" onclick="showRefModal('C_pharm');event.stopPropagation()">📋 藥師端速查表</button>
+<aside class="notes">C5 是藥師在調劑端最需要自我稽核的類別。<br>C5.1「缺藥」——處方開了但拿不到，常見於特殊藥物或急性缺貨。<br>C5.2「未提供必要資訊」——是最常被低估的原因，例如從未告知吸入劑使用後需漱口。<br>C5.4 是開藥品或規格錯誤；C5.3 是 OTC 建議時給錯。</aside>
 </section>
 
 <section>
-<h2>[原因 C]：9 個主分類，38 個次分類（2/2）</h2>
-<table class="sys-table" style="font-size:0.58em;"><thead><tr><th>代碼</th><th>主分類</th><th>次分類（含說明）</th></tr></thead><tbody>
-<tr class="c-grp-admin"><td colspan="3">🏥 醫療人員 / 照護者給藥過程（C6）</td></tr>
-<tr><td><strong>C6</strong></td><td>給藥過程<br><small>醫療人員/照顧者</small></td><td>
+<h2 style="color:#7A5A1E;border-left:5px solid #7A5A1E;padding-left:12px;">🏥 原因 C — 醫療人員 / 照護者給藥過程（C6）</h2>
+<table class="sys-table" style="font-size:0.7em;"><thead><tr><th>代碼</th><th>主分類</th><th>次分類（含說明）</th></tr></thead><tbody>
+<tr><td><strong>C6</strong></td><td>給藥過程<br><small>醫療人員 / 照顧者</small></td><td>
   C6.1 給藥時間或間隔不適當<br>
   C6.2 給予劑量不足　C6.3 給予劑量過量<br>
   C6.4 未給予藥物　C6.5 給錯藥物　C6.6 給藥途徑錯誤
 </td></tr>
-<tr class="c-grp-pt"><td colspan="3">🧑 病人端（C7–C8）：用藥行為 / 照護轉銜</td></tr>
+</tbody></table>
+<button class="quick-ref-btn" onclick="showRefModal('C_admin');event.stopPropagation()">📋 醫療/照護者速查表</button>
+<aside class="notes">C6 是由醫療人員或照護者執行給藥時發生的問題，常見於住院或長照情境。<br>C6.4「未給予藥物」——例如備藥備好了但忘記給；C6.6「給藥途徑錯誤」——例如口服藥被鼻胃管灌食，或注射途徑用錯。<br>這類原因的介入對象通常是護理師或照護機構人員，屬於跨職系的 DRP 管理。</aside>
+</section>
+
+<section>
+<h2 style="color:#5A3E72;border-left:5px solid #5A3E72;padding-left:12px;">🧑 原因 C — 病人端（C7–C8）</h2>
+<table class="sys-table" style="font-size:0.6em;"><thead><tr><th>代碼</th><th>主分類</th><th>次分類（含說明）</th></tr></thead><tbody>
 <tr><td><strong>C7</strong></td><td>病人因素</td><td>
   C7.1 故意少用或不服藥 <span class="code-tag">不吃</span><br>
   C7.2 服用超出處方劑量<br>
@@ -990,7 +1003,14 @@
   C7.10 無法正確理解服藥說明 <span class="code-tag">溝通</span>
 </td></tr>
 <tr><td><strong>C8</strong></td><td>照護轉銜</td><td>C8.1 用藥連貫性問題 <span class="code-tag">跨科別 / 跨院際整合</span></td></tr>
-<tr class="c-grp-other"><td colspan="3">📎 其他（C9）</td></tr>
+</tbody></table>
+<button class="quick-ref-btn" onclick="showRefModal('C_patient');event.stopPropagation()">📋 病人端速查表</button>
+<aside class="notes">C7 病人因素是社區藥師最常遇到的——C7.1「不吃」是故意不服藥；C7.8 是無意間用錯；C7.9「磨粉」是因為吞嚥困難等生理因素；C7.10「溝通」是病人聽不懂說明。<br>C8 照護轉銜——在病人從醫院轉到社區，或跨科就醫時，常因用藥整合問題產生 DRP。</aside>
+</section>
+
+<section>
+<h2 style="color:#555;border-left:5px solid #555;padding-left:12px;">📎 原因 C — 其他（C9）</h2>
+<table class="sys-table" style="font-size:0.7em;"><thead><tr><th>代碼</th><th>主分類</th><th>次分類（含說明）</th></tr></thead><tbody>
 <tr><td><strong>C9</strong></td><td>其他</td><td>
   C9.1 未進行適當的療效監測 <span class="code-tag">如 TDM</span><br>
   C9.2 無原因（需詳細說明）<br>
@@ -998,13 +1018,9 @@
 </td></tr>
 </tbody></table>
 <blockquote>一個問題可對應<strong>多個原因</strong>，但建議聚焦 ≦ 3 個</blockquote>
-<div class="quick-ref-row">
-  <button class="quick-ref-btn" onclick="showRefModal('C_doc');event.stopPropagation()">👨‍⚕️ 醫師端速查</button>
-  <button class="quick-ref-btn" onclick="showRefModal('C_pharm');event.stopPropagation()">💊 藥師端速查</button>
-  <button class="quick-ref-btn" onclick="showRefModal('C_admin');event.stopPropagation()">🏥 醫療/照護者速查</button>
-  <button class="quick-ref-btn" onclick="showRefModal('C_patient');event.stopPropagation()">🧑 病人端速查</button>
-  <button class="quick-ref-btn" onclick="showRefModal('C_other');event.stopPropagation()">📎 其他速查</button>
-</div>
+<button class="quick-ref-btn" onclick="showRefModal('C_other');event.stopPropagation()">📋 其他速查表</button>
+<aside class="notes">C9.3「正常使用但就有 ADR」——臨床上有些 ADR 無法預期，用 C9.3 是誠實的記錄，而非記錄失敗。<br>原因可以複選，但建議聚焦三個以內，避免過度歸因。</aside>
+</section>
 <aside class="notes">C6 到 C9 偏向「使用端」的問題。<br>C7 病人因素是社區藥師最常遇到的——C7.1「不吃」是故意不服藥；C7.8 是無意間用錯；C7.9「磨粉」是因為吞嚥困難等生理因素；C7.10「溝通」是病人聽不懂說明。<br>C8 照護轉銜——在病人從醫院轉到社區，或跨科就醫時，常因用藥整合問題產生 DRP。<br>C9.3「正常使用但就有 ADR」——臨床上有些 ADR 無法預期，用 C9.3 是誠實的記錄，而非記錄失敗。<br>原因可以複選，但建議聚焦三個以內，避免過度歸因。</aside>
 </section>
 
