@@ -262,10 +262,10 @@
   <!-- 講義領取 -->
   <div class="form-box">
     <h3>📄 領取課程講義 PDF</h3>
-    <p>講義整理中，即將開放下載。</p>
+    <p>輸入 Email 後可立即下載講義 PDF 及 PCNE 簡表。</p>
     <div class="form-row">
-      <input type="email" id="email-input" placeholder="your@email.com" disabled>
-      <button id="submit-btn" disabled style="opacity:0.45;cursor:default;">即將開放</button>
+      <input type="email" id="email-input" placeholder="your@email.com">
+      <button id="submit-btn" onclick="submitEmail()">下載講義</button>
     </div>
     <div class="form-msg" id="form-msg"></div>
   </div>
@@ -306,16 +306,18 @@
       return;
     }
 
-    // 立刻觸發下載
-    const a = document.createElement('a');
-    a.href = 'handout.pdf';
-    a.download = 'PCNE-DRP概論_講義.pdf';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    // 觸發兩個檔案下載
+    [
+      { href: 'handout.pdf',           name: 'PCNE-DRP概論_講義.pdf' },
+      { href: 'assets/PCNE簡表.pdf',  name: 'PCNE-v9.1-簡表.pdf'   },
+    ].forEach(({ href, name }) => {
+      const a = document.createElement('a');
+      a.href = href; a.download = name;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    });
 
     msg.className = 'form-msg ok';
-    msg.textContent = '✓ 講義下載中，請稍候…';
+    msg.textContent = '✓ 正在下載講義 PDF 及 PCNE 簡表，請稍候…';
     btn.disabled = true;
     input.value = '';
 
