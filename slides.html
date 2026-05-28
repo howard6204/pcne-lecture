@@ -297,6 +297,14 @@
     .sys-ref { font-size: 0.44em; color: #777; text-align: right; margin-top: 2px; }
     .section-dense { padding: 10px 28px 4px !important; }
     .section-dense h2 { margin-bottom: 4px !important; font-size: 1.05em !important; }
+    /* C 分組 header rows */
+    .c-grp-doc  td { background: #3D5A78; color: #fff; font-weight: 700; padding: 3px 8px; }
+    .c-grp-pharm td { background: #4E7A5A; color: #fff; font-weight: 700; padding: 3px 8px; }
+    .c-grp-admin td { background: #7A5A1E; color: #fff; font-weight: 700; padding: 3px 8px; }
+    .c-grp-pt   td { background: #5A3E72; color: #fff; font-weight: 700; padding: 3px 8px; }
+    .c-grp-other td { background: #555;    color: #fff; font-weight: 700; padding: 3px 8px; }
+    /* 速查表按鈕列 */
+    .quick-ref-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 2px; }
 
     /* ── 問答互動頁 ── */
     .quiz-wrap {
@@ -938,6 +946,7 @@
 <section>
 <h2>[原因 C]：9 個主分類，38 個次分類（1/2）</h2>
 <table class="sys-table" style="font-size:0.6em;"><thead><tr><th>代碼</th><th>主分類</th><th>次分類（含說明）</th></tr></thead><tbody>
+<tr class="c-grp-doc"><td colspan="3">👨‍⚕️ 醫師端（C1–C4）：處方 / 藥物選擇相關</td></tr>
 <tr><td><strong>C1</strong></td><td>藥物選擇</td><td>
   C1.1 不適當用藥（禁忌 / 無適應症）<br>
   C1.2 無藥品適應症<br>
@@ -949,6 +958,7 @@
 <tr><td><strong>C2</strong></td><td>劑型選擇</td><td>C2.1 藥物劑型 / 配方不適宜</td></tr>
 <tr><td><strong>C3</strong></td><td>劑量選擇</td><td>C3.1 劑量過低　C3.2 劑量過高<br>C3.3 給藥頻次不足　C3.4 給藥頻次過多<br>C3.5 用藥時間指示錯誤 / 不清楚</td></tr>
 <tr><td><strong>C4</strong></td><td>療程長短</td><td>C4.1 療程過短　C4.2 療程過長</td></tr>
+<tr class="c-grp-pharm"><td colspan="3">💊 藥師端（C5）：調劑相關</td></tr>
 <tr><td><strong>C5</strong></td><td>調劑問題</td><td>
   C5.1 處方藥物無法獲得 <span class="code-tag">缺藥</span><br>
   C5.2 未提供必要資訊 / 提供錯誤資訊<br>
@@ -962,11 +972,13 @@
 <section>
 <h2>[原因 C]：9 個主分類，38 個次分類（2/2）</h2>
 <table class="sys-table" style="font-size:0.58em;"><thead><tr><th>代碼</th><th>主分類</th><th>次分類（含說明）</th></tr></thead><tbody>
+<tr class="c-grp-admin"><td colspan="3">🏥 醫療人員 / 照護者給藥過程（C6）</td></tr>
 <tr><td><strong>C6</strong></td><td>給藥過程<br><small>醫療人員/照顧者</small></td><td>
   C6.1 給藥時間或間隔不適當<br>
   C6.2 給予劑量不足　C6.3 給予劑量過量<br>
   C6.4 未給予藥物　C6.5 給錯藥物　C6.6 給藥途徑錯誤
 </td></tr>
+<tr class="c-grp-pt"><td colspan="3">🧑 病人端（C7–C8）：用藥行為 / 照護轉銜</td></tr>
 <tr><td><strong>C7</strong></td><td>病人因素</td><td>
   C7.1 故意少用或不服藥 <span class="code-tag">不吃</span><br>
   C7.2 服用超出處方劑量<br>
@@ -978,6 +990,7 @@
   C7.10 無法正確理解服藥說明 <span class="code-tag">溝通</span>
 </td></tr>
 <tr><td><strong>C8</strong></td><td>照護轉銜</td><td>C8.1 用藥連貫性問題 <span class="code-tag">跨科別 / 跨院際整合</span></td></tr>
+<tr class="c-grp-other"><td colspan="3">📎 其他（C9）</td></tr>
 <tr><td><strong>C9</strong></td><td>其他</td><td>
   C9.1 未進行適當的療效監測 <span class="code-tag">如 TDM</span><br>
   C9.2 無原因（需詳細說明）<br>
@@ -985,7 +998,13 @@
 </td></tr>
 </tbody></table>
 <blockquote>一個問題可對應<strong>多個原因</strong>，但建議聚焦 ≦ 3 個</blockquote>
-<button class="quick-ref-btn" onclick="showRefModal('C');event.stopPropagation()">📋 開啟 C 分類速查表</button>
+<div class="quick-ref-row">
+  <button class="quick-ref-btn" onclick="showRefModal('C_doc');event.stopPropagation()">👨‍⚕️ 醫師端速查</button>
+  <button class="quick-ref-btn" onclick="showRefModal('C_pharm');event.stopPropagation()">💊 藥師端速查</button>
+  <button class="quick-ref-btn" onclick="showRefModal('C_admin');event.stopPropagation()">🏥 醫療/照護者速查</button>
+  <button class="quick-ref-btn" onclick="showRefModal('C_patient');event.stopPropagation()">🧑 病人端速查</button>
+  <button class="quick-ref-btn" onclick="showRefModal('C_other');event.stopPropagation()">📎 其他速查</button>
+</div>
 <aside class="notes">C6 到 C9 偏向「使用端」的問題。<br>C7 病人因素是社區藥師最常遇到的——C7.1「不吃」是故意不服藥；C7.8 是無意間用錯；C7.9「磨粉」是因為吞嚥困難等生理因素；C7.10「溝通」是病人聽不懂說明。<br>C8 照護轉銜——在病人從醫院轉到社區，或跨科就醫時，常因用藥整合問題產生 DRP。<br>C9.3「正常使用但就有 ADR」——臨床上有些 ADR 無法預期，用 C9.3 是誠實的記錄，而非記錄失敗。<br>原因可以複選，但建議聚焦三個以內，避免過度歸因。</aside>
 </section>
 
@@ -1037,6 +1056,10 @@
 <h3>DRP 狀態 [O]：4 個主分類
 > 整個 DRP 只記錄一個最終狀態</h3>
 <p>| O0 | 狀態不明 | O1 | 問題已解決 |<br>| O2 | 問題部分解決 | O3 | 問題未解決 |</p>
+<div class="quick-ref-row">
+  <button class="quick-ref-btn" onclick="showRefModal('A');event.stopPropagation()">📋 接受度 A 速查表</button>
+  <button class="quick-ref-btn" onclick="showRefModal('O');event.stopPropagation()">📋 DRP 狀態 O 速查表</button>
+</div>
 <aside class="notes">A 和 O 是兩個不同層次的記錄。<br>A 是「接受度」——每一個介入行為都有自己的接受度。向醫師建議被接受？A1。向病人衛教，但病人拒絕改變行為？A2。<br>O 是「整個 DRP 的最終結果」——只有一個。就算有三個介入，最後整個問題只記錄一個 O。<br>A2 未被接受 ≠ O3 問題未解決——即使醫師拒絕你的建議，如果後來病人自然好轉，O 仍然可以是 O1。<br>這兩個指標在研究中非常重要：A1 的比率代表藥師影響力，O1+O2 的比率代表照護品質。</aside>
 </section>
 
@@ -1725,6 +1748,143 @@
           ['C9.1', '未進行適當的療效監測（如 TDM）'],
           ['C9.2', '無原因（需詳細說明）'],
           ['C9.3', '正常使用但就有 ADR（無法預期的反應）'],
+        ]},
+      ]
+    },
+    C_doc: {
+      title: '原因 C — 👨‍⚕️ 醫師端（C1–C4）',
+      subtitle: '處方 / 藥物選擇相關',
+      cols: ['面向', '編碼', '原因說明'],
+      rows: [
+        { domain: '<strong>C1. 藥物選擇</strong>', codes: [
+          ['C1.1', '不適當用藥（禁忌 / 無適應症）'],
+          ['C1.2', '無藥品適應症'],
+          ['C1.3', '不適當的藥物交互作用'],
+          ['C1.4', '重複用藥（活性成分或作用機轉相同）'],
+          ['C1.5', '有適應症卻未給藥'],
+          ['C1.6', '同適應症使用太多種藥（非必要多重用藥）'],
+        ]},
+        { domain: '<strong>C2. 劑型選擇</strong>', codes: [
+          ['C2.1', '藥物劑型 / 配方不適宜'],
+        ]},
+        { domain: '<strong>C3. 劑量選擇</strong>', codes: [
+          ['C3.1', '劑量過低'],
+          ['C3.2', '劑量過高'],
+          ['C3.3', '給藥頻次不足'],
+          ['C3.4', '給藥頻次過多'],
+          ['C3.5', '用藥時間指示錯誤 / 不清楚'],
+        ]},
+        { domain: '<strong>C4. 療程長短</strong>', codes: [
+          ['C4.1', '療程過短'],
+          ['C4.2', '療程過長'],
+        ]},
+      ]
+    },
+    C_pharm: {
+      title: '原因 C — 💊 藥師端（C5）',
+      subtitle: '調劑相關',
+      cols: ['面向', '編碼', '原因說明'],
+      rows: [
+        { domain: '<strong>C5. 調劑問題</strong>', codes: [
+          ['C5.1', '處方藥物無法獲得（缺藥）'],
+          ['C5.2', '未提供必要資訊 / 提供錯誤資訊'],
+          ['C5.3', '調劑了錯誤藥物 / 規格 / 劑量（OTC）'],
+          ['C5.4', '調劑了錯誤的藥物或規格'],
+        ]},
+      ]
+    },
+    C_admin: {
+      title: '原因 C — 🏥 醫療人員 / 照護者給藥（C6）',
+      subtitle: '醫護或照顧者執行給藥的過程問題',
+      cols: ['面向', '編碼', '原因說明'],
+      rows: [
+        { domain: '<strong>C6. 給藥過程</strong>', codes: [
+          ['C6.1', '給藥時間或間隔不適當'],
+          ['C6.2', '給予劑量不足'],
+          ['C6.3', '給予劑量過量'],
+          ['C6.4', '未給予藥物'],
+          ['C6.5', '給錯藥物'],
+          ['C6.6', '給藥途徑錯誤'],
+        ]},
+      ]
+    },
+    C_patient: {
+      title: '原因 C — 🧑 病人端（C7–C8）',
+      subtitle: '病人用藥行為 / 照護轉銜',
+      cols: ['面向', '編碼', '原因說明'],
+      rows: [
+        { domain: '<strong>C7. 病人因素</strong>', codes: [
+          ['C7.1', '故意少用或不服藥'],
+          ['C7.2', '服用超出處方劑量'],
+          ['C7.3', '濫用藥物'],
+          ['C7.4', '服用不必要的藥物'],
+          ['C7.5', '食物交互作用'],
+          ['C7.6', '儲存藥品不適當'],
+          ['C7.7', '服藥時間 / 間隔不適當'],
+          ['C7.8', '無意間以錯誤方式服藥'],
+          ['C7.9', '因生理因素無法依指示使用（如磨粉）'],
+          ['C7.10', '無法正確理解服藥說明'],
+        ]},
+        { domain: '<strong>C8. 照護轉銜</strong>', codes: [
+          ['C8.1', '用藥連貫性問題（跨科 / 跨院）'],
+        ]},
+      ]
+    },
+    C_other: {
+      title: '原因 C — 📎 其他（C9）',
+      subtitle: '無法歸類至其他面向的原因',
+      cols: ['面向', '編碼', '原因說明'],
+      rows: [
+        { domain: '<strong>C9. 其他</strong>', codes: [
+          ['C9.1', '未進行適當的療效監測（如 TDM）'],
+          ['C9.2', '無原因（需詳細說明）'],
+          ['C9.3', '正常使用但就有 ADR（無法預期的反應）'],
+        ]},
+      ]
+    },
+    A: {
+      title: '介入接受度（Acceptance）',
+      subtitle: '每一個介入行為都需單獨記錄一個接受度',
+      cols: ['面向', '編碼', '說明'],
+      rows: [
+        { domain: '<strong>A0. 介入不適用</strong>', codes: [
+          ['A0.0', '介入不適用，或問題不需介入'],
+        ]},
+        { domain: '<strong>A1. 介入被接受</strong>', codes: [
+          ['A1.1', '接受，已完全執行'],
+          ['A1.2', '接受，已部分執行'],
+          ['A1.3', '接受，尚未執行'],
+          ['A1.4', '尚未評估接受程度'],
+        ]},
+        { domain: '<strong>A2. 介入未被接受</strong>', codes: [
+          ['A2.1', '未接受（不可行）'],
+          ['A2.2', '未接受（處方者 / 病人不同意）'],
+          ['A2.3', '未接受（其他原因）'],
+        ]},
+        { domain: '<strong>A3. 接受情形不明</strong>', codes: [
+          ['A3.1', '接受情形不明，但介入已執行'],
+          ['A3.2', '接受情形不明，介入未執行'],
+        ]},
+      ]
+    },
+    O: {
+      title: 'DRP 最終狀態（Outcome）',
+      subtitle: '整個 DRP 只記錄一個最終狀態（在追蹤後填寫）',
+      cols: ['面向', '編碼', '說明'],
+      rows: [
+        { domain: '<strong>O0. 結果不明</strong>', codes: [
+          ['O0.0', '結果不明（失聯 / 無法追蹤）'],
+        ]},
+        { domain: '<strong>O1. 問題完全解決</strong>', codes: [
+          ['O1.0', '問題完全解決'],
+        ]},
+        { domain: '<strong>O2. 問題部分解決</strong>', codes: [
+          ['O2.0', '問題部分解決'],
+        ]},
+        { domain: '<strong>O3. 問題未解決</strong>', codes: [
+          ['O3.1', '未解決：介入未被接受'],
+          ['O3.2', '未解決：介入被接受但無效'],
+          ['O3.3', '未解決：無需進一步介入（問題自然消失）'],
         ]},
       ]
     },
