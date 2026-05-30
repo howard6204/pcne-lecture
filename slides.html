@@ -1511,9 +1511,45 @@
     chalkboard: {
       boardmarkerWidth: 4,
       chalkWidth: 5,
-      chalkEffect: 0.5,
+      chalkEffect: 0.05,     // 近實線（0 因 plugin 用 if(config.x) 判斷會被忽略，故用 0.05）
+      grid: false,           // 不要網格線
       toggleNotesButton: false,
       toggleChalkboardButton: false,
+      // 不依賴外部 img/ 圖檔：橡皮擦用內嵌 SVG、各色筆游標用 CSS crosshair、黑板底圖內嵌
+      eraser: {
+        src: 'data:image/svg+xml;utf8,' + encodeURIComponent(
+          "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>" +
+          "<g transform='rotate(45 12 12)'>" +
+          "<rect x='4' y='9' width='16' height='8' rx='1.5' fill='#f48fb1' stroke='#880e4f' stroke-width='1.2'/>" +
+          "<rect x='4' y='13' width='16' height='4' fill='#ec407a' stroke='#880e4f' stroke-width='1.2'/>" +
+          "</g></svg>"),
+        radius: 20,
+      },
+      // 投影片上的畫筆（覆蓋在淺色投影片）：預設紅色，跳色
+      boardmarkers: [
+        { color: 'rgba(220,20,60,1)',   cursor: 'crosshair' },
+        { color: 'rgba(30,144,255,1)',  cursor: 'crosshair' },
+        { color: 'rgba(50,205,50,1)',   cursor: 'crosshair' },
+        { color: 'rgba(255,140,0,1)',   cursor: 'crosshair' },
+        { color: 'rgba(150,0,200,1)',   cursor: 'crosshair' },
+        { color: 'rgba(255,221,51,1)',  cursor: 'crosshair' },
+        { color: 'rgba(40,40,40,1)',    cursor: 'crosshair' },
+      ],
+      // 黑板上的粉筆（深色板）：預設亮黃，跳色；全不透明＝清晰
+      chalks: [
+        { color: 'rgba(255,221,51,1)',  cursor: 'crosshair' },
+        { color: 'rgba(255,255,255,1)', cursor: 'crosshair' },
+        { color: 'rgba(80,200,255,1)',  cursor: 'crosshair' },
+        { color: 'rgba(255,99,99,1)',   cursor: 'crosshair' },
+        { color: 'rgba(120,240,120,1)', cursor: 'crosshair' },
+        { color: 'rgba(255,170,60,1)',  cursor: 'crosshair' },
+        { color: 'rgba(255,130,220,1)', cursor: 'crosshair' },
+      ],
+      background: [
+        'rgba(127,127,127,.1)',
+        'data:image/svg+xml;utf8,' + encodeURIComponent(
+          "<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><rect width='10' height='10' fill='#1f2730'/></svg>"),
+      ],
     },
   });
 
