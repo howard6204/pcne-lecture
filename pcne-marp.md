@@ -258,6 +258,7 @@ style: |
   <div class="presenter-info">
     <strong>張綜瑋 藥師</strong><br>
     彰化基督教醫療財團法人 員林基督教醫院<br>
+嘉南藥理大學藥學系 兼任講師<br>
     中華民國藥師公會全國聯合會 ｜ <strong>藥事照護專業藥師培訓課程</strong>
   </div>
 </div>
