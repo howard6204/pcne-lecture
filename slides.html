@@ -1701,8 +1701,21 @@
     document.getElementById('code-popover-body').innerHTML = html;
     const rect = el.getBoundingClientRect();
     popover.style.display = 'block';
-    popover.style.top = Math.min(rect.bottom + 6, window.innerHeight - 300) + 'px';
-    popover.style.left = Math.max(10, rect.left) + 'px';
+    // 先顯示再量實際尺寸，確保整個浮窗（含長清單 C/I）都落在視窗內，內部捲動才有效
+    const pw = popover.offsetWidth;
+    const ph = popover.offsetHeight;
+    const margin = 10;
+    let top = rect.bottom + 6;
+    if (top + ph > window.innerHeight - margin) {
+      top = Math.max(margin, window.innerHeight - ph - margin);
+    }
+    let left = rect.left;
+    if (left + pw > window.innerWidth - margin) {
+      left = Math.max(margin, window.innerWidth - pw - margin);
+    }
+    left = Math.max(margin, left);
+    popover.style.top = top + 'px';
+    popover.style.left = left + 'px';
   }
 
   // 讓案例題目的 P/C/I 標籤可點擊
